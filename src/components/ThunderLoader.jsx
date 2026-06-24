@@ -391,7 +391,7 @@ export default function ThunderLoader({ onDone }) {
               textTransform: "uppercase",
               color: "rgba(129,140,248,.4)",
               marginTop: 10,
-            }}>kushdeveloper.me</div>
+            }}>Vishandeveloper.me</div>
           </div>
         </div>
         {/* edge glow */}
