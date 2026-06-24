@@ -67,7 +67,7 @@ const CharReveal = ({ text, delay = 0, className = "", style = {} }) => {
   }, [delay]);
 
   return (
-    <span className={className} style={style} aria-label={text}>
+    <span className={className} style={{ display: "inline-block", ...style }} aria-label={text}>
       {text.split("").map((ch, j) => (
         <span
           key={j}
@@ -75,11 +75,12 @@ const CharReveal = ({ text, delay = 0, className = "", style = {} }) => {
             display: "inline-block",
             opacity: show ? 1 : 0,
             transform: show
-              ? "translateY(0) rotateX(0) scale(1)"
-              : "translateY(60px) rotateX(-90deg) scale(0.8)",
-            transition: `opacity .55s cubic-bezier(.16,1,.3,1) ${delay + j * 28}ms,
-                         transform .65s cubic-bezier(.16,1,.3,1) ${delay + j * 28}ms`,
+              ? "translateY(0) rotateX(0)"
+              : "translateY(55px) rotateX(-85deg)",
+            transition: `opacity .5s ease ${delay + j * 26}ms,
+                         transform .6s cubic-bezier(.16,1,.3,1) ${delay + j * 26}ms`,
             transformOrigin: "bottom center",
+            willChange: "opacity, transform",
           }}
         >
           {ch === " " ? "\u00A0" : ch}
@@ -144,13 +145,24 @@ export default function Hero() {
 
         /* ---- Gradient name ---- */
         .name-grad {
-          background: linear-gradient(120deg,
-            #ffffff 0%, #e0f2fe 18%, #7dd3fc 38%,
-            #818cf8 58%, #c084fc 76%, #f0abfc 92%, #ffffff 100%);
-          background-size: 300% 300%;
+          color: #ffffff;
+          background: linear-gradient(110deg,
+            #ffffff 0%,
+            #e0f2fe 15%,
+            #7dd3fc 32%,
+            #a5b4fc 50%,
+            #c084fc 68%,
+            #e0f2fe 85%,
+            #ffffff 100%);
+          background-size: 280% 100%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          animation: grad-shift 8s ease infinite;
+          background-clip: text;
+          animation: grad-shift 6s ease-in-out infinite;
+          filter: brightness(1.15);
+        }
+        @supports not (-webkit-background-clip: text) {
+          .name-grad { color: #e0f2fe; -webkit-text-fill-color: #e0f2fe; }
         }
         @keyframes grad-shift {
           0%,100% { background-position: 0% 50%; }
@@ -159,7 +171,7 @@ export default function Hero() {
 
         /* ---- Title glow ---- */
         .elec-title {
-          text-shadow: 0 0 40px rgba(129,140,248,.18), 0 0 80px rgba(192,132,252,.1);
+          filter: drop-shadow(0 0 32px rgba(125,211,252,.35)) drop-shadow(0 0 64px rgba(192,132,252,.18));
         }
 
         /* ---- Stat card rotating border ---- */
@@ -370,10 +382,20 @@ export default function Hero() {
           {/* Gradient line with underline glow */}
           <div className="relative mx-auto w-fit">
             <h1
-              className="hero-bb name-grad elec-title block text-center uppercase leading-[0.84] tracking-[0.02em]"
+              className="hero-bb elec-title block text-center uppercase leading-[0.84] tracking-[0.02em]"
               style={{ fontSize: "clamp(40px,10vw,144px)" }}
             >
-              <CharReveal text="Into Websites" delay={360} />
+              <span
+                className="name-grad"
+                style={{
+                  display: "inline-block",
+                  opacity: mounted ? 1 : 0,
+                  transform: mounted ? "translateY(0)" : "translateY(50px)",
+                  transition: "opacity .7s ease 360ms, transform .8s cubic-bezier(.16,1,.3,1) 360ms",
+                }}
+              >
+                Into Websites
+              </span>
             </h1>
             <div className="name-underline" />
           </div>
