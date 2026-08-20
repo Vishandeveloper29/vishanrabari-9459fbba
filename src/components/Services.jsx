@@ -29,19 +29,19 @@ const services = [
   {
     icon: Gauge, title: "Performance Optimization",
     text: "Fast loading pages, optimized sections, lightweight animations, better structure, and smooth browsing experience.",
-    tag: "Speed", stat: "High Score", color: "#4ade80", rgb: "74,222,128",
+    tag: "Speed", stat: "High Score", color: "#38bdf8", rgb: "56,189,248",
     features: ["Fast Load", "Optimized Assets", "Smooth UX"],
   },
   {
     icon: Search, title: "SEO Ready Structure",
     text: "Clean headings, proper section flow, accessible layout, keyword-friendly content, and better search visibility.",
-    tag: "SEO", stat: "Rank Ready", color: "#fbbf24", rgb: "251,191,36",
+    tag: "SEO", stat: "Rank Ready", color: "#38bdf8", rgb: "56,189,248",
     features: ["Clean HTML", "Meta Tags", "Accessibility"],
   },
   {
     icon: Server, title: "Full Stack + Backend",
     text: "API integration, backend logic, database handling, auth-ready structure, and scalable full-stack website systems.",
-    tag: "Backend", stat: "Full Stack", color: "#f87171", rgb: "248,113,113",
+    tag: "Backend", stat: "Full Stack", color: "#38bdf8", rgb: "56,189,248",
     features: ["API Integration", "Database", "Auth Systems"],
   },
 ];
@@ -182,7 +182,7 @@ function ThunderCounter({ value, label, color }) {
         fontSize: "clamp(2rem, 4vw, 3.5rem)",
         color,
         lineHeight: 1,
-        textShadow: `0 0 20px rgba(${color === "#22d3ee" ? "34,211,238" : "251,191,36"},0.5)`,
+        textShadow: `0 0 20px rgba(${color === "#22d3ee" ? "34,211,238" : "56,189,248"},0.5)`,
       }}>
         {display}+
       </div>
@@ -562,8 +562,8 @@ const Services = () => {
           {/* Stats row */}
           <div style={{ display: "flex", gap: "clamp(2rem, 6vw, 5rem)", flexWrap: "wrap" }}>
             <ThunderCounter value={50} label="Projects Shipped" color="#22d3ee" />
-            <ThunderCounter value={30} label="Happy Clients" color="#fbbf24" />
-            <ThunderCounter value={99} label="Satisfaction %" color="#4ade80" />
+            <ThunderCounter value={30} label="Happy Clients" color="#38bdf8" />
+            <ThunderCounter value={99} label="Satisfaction %" color="#38bdf8" />
           </div>
         </div>
 
@@ -655,7 +655,7 @@ const Services = () => {
             </span>
             <div style={{ flex: 1 }} />
             <div style={{ display: "flex", gap: 6 }}>
-              {["#22d3ee", "#818cf8", "#4ade80", "#fbbf24"].map((c, i) => (
+              {["#22d3ee", "#818cf8", "#38bdf8", "#38bdf8"].map((c, i) => (
                 <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: c, opacity: 0.7 }} />
               ))}
             </div>
@@ -776,8 +776,8 @@ const Services = () => {
               {[
                 { label: "UI/UX", icon: PenTool, c: "#e879f9" },
                 { label: "React", icon: Code2, c: "#818cf8" },
-                { label: "Backend", icon: Server, c: "#f87171" },
-                { label: "SEO", icon: Search, c: "#fbbf24" },
+                { label: "Backend", icon: Server, c: "#38bdf8" },
+                { label: "SEO", icon: Search, c: "#38bdf8" },
               ].map(({ label, icon: Icon, c }) => (
                 <div key={label}
                   style={{

@@ -60,15 +60,15 @@ const JOURNEY = [
   {
     phase: "Phase 05", year: "2024–Now", title: "3D & Advanced UI", subtitle: "Three.js · WebGL · Blender",
     desc: "Diving into 3D web — Three.js, WebGL shaders, Blender models. Building cinematic, physics-driven portfolio experiences.",
-    tags: ["Three.js", "WebGL", "Blender", "GSAP"], color: "52,211,153", accent: "#34d399", icon: "🌐", status: "Current",
+    tags: ["Three.js", "WebGL", "Blender", "GSAP"], color: "34,211,238", accent: "#22d3ee", icon: "🌐", status: "Current",
     svgIcon: (
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
-        <circle cx="20" cy="20" r="16" stroke="rgba(52,211,153,0.6)" strokeWidth="1"/>
-        <ellipse cx="20" cy="20" rx="7" ry="16" stroke="rgba(52,211,153,0.6)" strokeWidth="1" fill="none"/>
-        <line x1="4" y1="20" x2="36" y2="20" stroke="rgba(52,211,153,0.4)" strokeWidth="1"/>
-        <line x1="6" y1="13" x2="34" y2="13" stroke="rgba(52,211,153,0.3)" strokeWidth="0.8"/>
-        <line x1="6" y1="27" x2="34" y2="27" stroke="rgba(52,211,153,0.3)" strokeWidth="0.8"/>
-        <circle cx="20" cy="20" r="3" fill="rgba(52,211,153,0.9)"/>
+        <circle cx="20" cy="20" r="16" stroke="rgba(34,211,238,0.6)" strokeWidth="1"/>
+        <ellipse cx="20" cy="20" rx="7" ry="16" stroke="rgba(34,211,238,0.6)" strokeWidth="1" fill="none"/>
+        <line x1="4" y1="20" x2="36" y2="20" stroke="rgba(34,211,238,0.4)" strokeWidth="1"/>
+        <line x1="6" y1="13" x2="34" y2="13" stroke="rgba(34,211,238,0.3)" strokeWidth="0.8"/>
+        <line x1="6" y1="27" x2="34" y2="27" stroke="rgba(34,211,238,0.3)" strokeWidth="0.8"/>
+        <circle cx="20" cy="20" r="3" fill="rgba(34,211,238,0.9)"/>
       </svg>
     ),
   },
@@ -87,8 +87,8 @@ const SVGParticleField = memo(() => (
         <stop offset="100%" stopColor="#6366f1" stopOpacity="0"/>
       </radialGradient>
       <radialGradient id="pf-glow-b" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="#34d399" stopOpacity="0.12"/>
-        <stop offset="100%" stopColor="#34d399" stopOpacity="0"/>
+        <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.12"/>
+        <stop offset="100%" stopColor="#22d3ee" stopOpacity="0"/>
       </radialGradient>
       <filter id="pf-blur-sm">
         <feGaussianBlur stdDeviation="1.5"/>
@@ -109,12 +109,12 @@ const SVGParticleField = memo(() => (
     </g>
 
     {/* Right side traces */}
-    <g opacity="0.15" stroke="#34d399" strokeWidth="0.6" fill="none" transform="translate(100%,0) scale(-1,1)">
+    <g opacity="0.15" stroke="#22d3ee" strokeWidth="0.6" fill="none" transform="translate(100%,0) scale(-1,1)">
       <path d="M0,100 L50,100 L50,70 L90,70"/>
       <path d="M0,200 L30,200 L30,170 L80,170"/>
       <path d="M0,300 L20,300 L20,260 L60,260"/>
-      <circle cx="50" cy="100" r="2" fill="#34d399" opacity="0.7"/>
-      <circle cx="30" cy="200" r="2" fill="#34d399" opacity="0.5"/>
+      <circle cx="50" cy="100" r="2" fill="#22d3ee" opacity="0.7"/>
+      <circle cx="30" cy="200" r="2" fill="#22d3ee" opacity="0.5"/>
     </g>
 
     {/* Floating geometric shapes */}
@@ -125,7 +125,7 @@ const SVGParticleField = memo(() => (
       <polygon points="88%,25% 92%,20% 96%,25% 92%,30%" fill="none" stroke="#38bdf8" strokeWidth="0.8">
         <animateTransform attributeName="transform" type="translate" values="0,0;0,10;0,0" dur="11s" repeatCount="indefinite"/>
       </polygon>
-      <rect x="3%" y="60%" width="18" height="18" rx="3" fill="none" stroke="#f472b6" strokeWidth="0.7" transform="rotate(15)">
+      <rect x="3%" y="60%" width="18" height="18" rx="3" fill="none" stroke="#818cf8" strokeWidth="0.7" transform="rotate(15)">
         <animateTransform attributeName="transform" type="rotate" values="0 3% 60%;360 3% 60%" dur="20s" repeatCount="indefinite"/>
       </rect>
       <rect x="91%" y="55%" width="14" height="14" rx="2" fill="none" stroke="#facc15" strokeWidth="0.7">
@@ -154,7 +154,7 @@ const SVGParticleField = memo(() => (
           cx={`${97 - col * 3}%`}
           cy={`${row * 10 + 5}%`}
           r="1"
-          fill="#34d399"
+          fill="#22d3ee"
           opacity={0.08 + Math.random() * 0.08}
         />
       ))
@@ -169,7 +169,7 @@ const SVGParticleField = memo(() => (
         <stop offset="0%" stopColor="transparent"/>
         <stop offset="30%" stopColor="rgba(99,102,241,0.6)"/>
         <stop offset="50%" stopColor="rgba(168,85,247,0.8)"/>
-        <stop offset="70%" stopColor="rgba(52,211,153,0.6)"/>
+        <stop offset="70%" stopColor="rgba(34,211,238,0.6)"/>
         <stop offset="100%" stopColor="transparent"/>
       </linearGradient>
     </defs>
@@ -188,16 +188,16 @@ const TimelineConnectorSVG = () => (
         <stop offset="0%"   stopColor="transparent"/>
         <stop offset="12%"  stopColor="rgba(99,102,241,0.6)"/>
         <stop offset="35%"  stopColor="rgba(168,85,247,0.5)"/>
-        <stop offset="58%"  stopColor="rgba(244,114,182,0.5)"/>
-        <stop offset="80%"  stopColor="rgba(52,211,153,0.5)"/>
+        <stop offset="58%"  stopColor="rgba(129,140,248,0.5)"/>
+        <stop offset="80%"  stopColor="rgba(34,211,238,0.5)"/>
         <stop offset="100%" stopColor="transparent"/>
       </linearGradient>
       <linearGradient id="spine-grad-center" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%"   stopColor="transparent"/>
         <stop offset="12%"  stopColor="rgba(99,102,241,0.5)"/>
         <stop offset="35%"  stopColor="rgba(168,85,247,0.4)"/>
-        <stop offset="58%"  stopColor="rgba(244,114,182,0.4)"/>
-        <stop offset="80%"  stopColor="rgba(52,211,153,0.4)"/>
+        <stop offset="58%"  stopColor="rgba(129,140,248,0.4)"/>
+        <stop offset="80%"  stopColor="rgba(34,211,238,0.4)"/>
         <stop offset="100%" stopColor="transparent"/>
       </linearGradient>
     </defs>
@@ -223,11 +223,11 @@ const HeadingSection = () => (
       {/* Corner ornaments */}
       <path d="M40,30 L60,30 L60,50" stroke="rgba(99,102,241,0.7)" strokeWidth="1" fill="none"/>
       <path d="M460,30 L440,30 L440,50" stroke="rgba(99,102,241,0.7)" strokeWidth="1" fill="none"/>
-      <path d="M40,190 L60,190 L60,170" stroke="rgba(52,211,153,0.7)" strokeWidth="1" fill="none"/>
-      <path d="M460,190 L440,190 L440,170" stroke="rgba(52,211,153,0.7)" strokeWidth="1" fill="none"/>
+      <path d="M40,190 L60,190 L60,170" stroke="rgba(34,211,238,0.7)" strokeWidth="1" fill="none"/>
+      <path d="M460,190 L440,190 L440,170" stroke="rgba(34,211,238,0.7)" strokeWidth="1" fill="none"/>
       {/* Tiny diamonds */}
       <polygon points="250,5 258,13 250,21 242,13" fill="none" stroke="rgba(167,139,250,0.6)" strokeWidth="0.8"/>
-      <polygon points="250,200 255,205 250,210 245,205" fill="rgba(52,211,153,0.4)" stroke="none"/>
+      <polygon points="250,200 255,205 250,210 245,205" fill="rgba(34,211,238,0.4)" stroke="none"/>
     </svg>
 
     <div style={{ position: "relative", zIndex: 1 }}>
@@ -238,7 +238,7 @@ const HeadingSection = () => (
         background: "rgba(99,102,241,0.08)", backdropFilter: "blur(16px)",
       }}>
         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8", boxShadow: "0 0 8px rgba(129,140,248,0.9)", animation: "journey-pulse 2s ease-in-out infinite" }} />
-        <span style={{ fontFamily: "'DM Mono',monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(165,180,252,0.85)" }}>
+        <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(165,180,252,0.85)" }}>
           My Journey
         </span>
       </div>
@@ -251,7 +251,7 @@ const HeadingSection = () => (
       }}>
         THE{" "}
         <span style={{
-          background: "linear-gradient(135deg,#6366f1 0%,#a78bfa 30%,#f472b6 60%,#34d399 100%)",
+          background: "linear-gradient(135deg,#6366f1 0%,#a78bfa 30%,#818cf8 60%,#22d3ee 100%)",
           backgroundSize: "200% 200%",
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
           animation: "journey-grad 5s ease infinite",
@@ -373,7 +373,7 @@ const MagneticCard = ({ item, index }) => {
   }, []);
 
   const statusConfig = {
-    Completed: { bg: "rgba(52,211,153,0.1)", border: "rgba(52,211,153,0.3)", text: "#34d399", dot: "#34d399" },
+    Completed: { bg: "rgba(34,211,238,0.1)", border: "rgba(34,211,238,0.3)", text: "#22d3ee", dot: "#22d3ee" },
     Active:    { bg: "rgba(99,102,241,0.1)", border: "rgba(99,102,241,0.3)", text: "#818cf8", dot: "#818cf8" },
     Current:   { bg: "rgba(250,204,21,0.08)", border: "rgba(250,204,21,0.3)", text: "#facc15", dot: "#facc15" },
   };
@@ -459,14 +459,14 @@ const MagneticCard = ({ item, index }) => {
               </div>
               <div>
                 <div style={{
-                  fontFamily: "'DM Mono',monospace", fontSize: 9, fontWeight: 700,
+                  fontFamily: "'JetBrains Mono',monospace", fontSize: 9, fontWeight: 700,
                   letterSpacing: "0.3em", textTransform: "uppercase",
                   color: `rgba(${item.color},0.8)`, marginBottom: 3,
                 }}>
                   {item.phase} · {item.year}
                 </div>
                 <h3 style={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bebas Neue',sans-serif",
                   fontSize: "clamp(16px,2.5vw,22px)",
                   fontWeight: 800, color: "#fff", margin: 0, lineHeight: 1.1,
                   textShadow: hov ? `0 0 30px rgba(${item.color},0.4)` : "none",
@@ -490,7 +490,7 @@ const MagneticCard = ({ item, index }) => {
               padding: "4px 10px", borderRadius: 999,
               border: `1px solid ${sc.border}`,
               background: sc.bg, flexShrink: 0,
-              fontFamily: "'DM Mono',monospace", fontSize: 8.5, fontWeight: 700,
+              fontFamily: "'JetBrains Mono',monospace", fontSize: 8.5, fontWeight: 700,
               letterSpacing: "0.2em", textTransform: "uppercase", color: sc.text,
             }}>
               <span style={{
@@ -522,7 +522,7 @@ const MagneticCard = ({ item, index }) => {
                   padding: "4px 10px", borderRadius: 999,
                   border: `1px solid rgba(${item.color},0.22)`,
                   background: `rgba(${item.color},0.06)`,
-                  fontFamily: "'DM Mono',monospace", fontSize: 9, fontWeight: 700,
+                  fontFamily: "'JetBrains Mono',monospace", fontSize: 9, fontWeight: 700,
                   letterSpacing: "0.15em", textTransform: "uppercase",
                   color: `rgba(${item.color},0.85)`,
                   transition: "all .25s ease",
@@ -540,7 +540,7 @@ const MagneticCard = ({ item, index }) => {
                   padding: "4px 10px", borderRadius: 999,
                   border: `1px solid rgba(${item.color},0.5)`,
                   background: `rgba(${item.color},0.12)`,
-                  fontFamily: "'DM Mono',monospace", fontSize: 9, fontWeight: 700,
+                  fontFamily: "'JetBrains Mono',monospace", fontSize: 9, fontWeight: 700,
                   letterSpacing: "0.15em", textTransform: "uppercase",
                   color: item.accent, textDecoration: "none",
                   transition: "all .25s ease",
@@ -589,7 +589,7 @@ const Journey = () => (
     padding: "clamp(70px,10vw,112px) clamp(16px,4vw,40px)",
   }}>
     <style>{`
-      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
       #journey *, #journey *::before, #journey *::after { box-sizing: border-box; }
 
       @keyframes journey-ping        { 0%{transform:scale(1);opacity:.6} 75%,100%{transform:scale(2.4);opacity:0} }
@@ -665,7 +665,7 @@ const Journey = () => (
           <span style={{ fontSize: "clamp(11px,1.5vw,13px)", fontWeight: 600, color: "rgba(255,255,255,.38)", fontFamily: "'DM Sans',sans-serif", letterSpacing: ".02em", position: "relative" }}>
             Still building · Always learning · Open to new opportunities
           </span>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#f472b6", animation: "journey-pulse 2s ease-in-out infinite .8s", boxShadow: "0 0 12px rgba(244,114,182,.8)", flexShrink: 0 }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#818cf8", animation: "journey-pulse 2s ease-in-out infinite .8s", boxShadow: "0 0 12px rgba(129,140,248,.8)", flexShrink: 0 }} />
         </div>
       </div>
     </div>

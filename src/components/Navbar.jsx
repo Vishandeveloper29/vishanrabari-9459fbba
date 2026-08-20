@@ -48,8 +48,8 @@ const Navbar = () => {
   return (
     <>
       <style>{`
-        .nav-font  { font-family: 'Space Grotesk', sans-serif; }
-        .mono-font { font-family: 'DM Mono', monospace; }
+        .nav-font  { font-family: 'DM Sans', sans-serif; }
+        .mono-font { font-family: 'JetBrains Mono', monospace; }
 
         /* ─ glass pill ─ */
         .glass-pill {

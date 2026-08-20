@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from "react";
 
 const fields = [
     { key: "role", value: '"Frontend Dev"', vcolor: "#fc81b8" },
-    { key: "location", value: '"Gandhidham, IN"', vcolor: "#f97316" },
+    { key: "location", value: '"Gandhidham, IN"', vcolor: "#38bdf8" },
     { key: "passion", value: '"Build cool stuff"', vcolor: "#68d391" },
     { key: "repos", value: "41", vcolor: "#00ffe7" },
     { key: "experience", value: '"1 Year"', vcolor: "#a855f7" },
-    { key: "projects", value: "7", vcolor: "#f97316" },
-    { key: "status", value: '"Open to Work"', vcolor: "#ffd700" },
+    { key: "projects", value: "7", vcolor: "#38bdf8" },
+    { key: "status", value: '"Open to Work"', vcolor: "#67e8f9" },
 ];
 
 const TerminalStats = ({ trigger = true }) => {
@@ -153,7 +153,7 @@ const TerminalStats = ({ trigger = true }) => {
 
                 <div
                     className="terminal-card relative z-10 w-full max-w-[360px] overflow-hidden rounded-2xl border border-purple-400/20 bg-[#080514]/95 shadow-[0_30px_80px_rgba(0,0,0,0.9),0_0_60px_rgba(124,58,237,0.18),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl"
-                    style={{ fontFamily: "'Fira Code', monospace" }}
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 >
                     <div className="terminal-scanline pointer-events-none absolute inset-x-0 z-20 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
 

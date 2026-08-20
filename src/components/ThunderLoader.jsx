@@ -359,7 +359,7 @@ export default function ThunderLoader({ onDone }) {
 
         <p style={{
           margin: "-8px 0 6px",
-          fontFamily: "'Space Grotesk',sans-serif",
+          fontFamily: "'DM Sans',sans-serif",
           fontSize: "clamp(11px,1.6vw,14px)",
           letterSpacing: ".04em",
           color: "rgba(226,220,255,.55)",
@@ -371,7 +371,7 @@ export default function ThunderLoader({ onDone }) {
 
         <div style={{
           marginTop: 18,
-          fontFamily: "'DM Mono',monospace",
+          fontFamily: "'JetBrains Mono',monospace",
           fontSize: 11, letterSpacing: ".35em", textTransform: "uppercase",
           color: isStriking ? "#fca5f7" : "rgba(167,139,250,.7)",
           animation: "tl-pulse-soft 1.6s ease-in-out infinite",
@@ -380,7 +380,7 @@ export default function ThunderLoader({ onDone }) {
         </div>
 
         <div style={{
-          fontFamily: "'Space Grotesk',sans-serif",
+          fontFamily: "'DM Sans',sans-serif",
           fontSize: "clamp(24px,4vw,34px)",
           fontWeight: 700,
           color: "#fff",
@@ -401,7 +401,7 @@ export default function ThunderLoader({ onDone }) {
             width: `${pct}%`,
             borderRadius: 999,
             background: pct >= 100
-              ? "linear-gradient(90deg,#f472b6,#818cf8,#38bdf8)"
+              ? "linear-gradient(90deg,#818cf8,#818cf8,#38bdf8)"
               : "linear-gradient(90deg,#7c3aed,#818cf8,#38bdf8)",
             boxShadow: "0 0 12px rgba(129,140,248,.8)",
             transition: "width .05s linear, background .3s ease",
@@ -420,7 +420,7 @@ export default function ThunderLoader({ onDone }) {
 
         <div style={{
           marginTop: 10,
-          fontFamily: "'DM Mono',monospace",
+          fontFamily: "'JetBrains Mono',monospace",
           fontSize: 9.5, letterSpacing: ".3em", textTransform: "uppercase",
           color: "rgba(255,255,255,.22)",
         }}>Preparing something extraordinary</div>
@@ -437,7 +437,7 @@ export default function ThunderLoader({ onDone }) {
         zIndex: 9999,
         background: "#050308",
         overflow: "hidden",
-        fontFamily: "'Space Grotesk', sans-serif",
+        fontFamily: "'DM Sans', sans-serif",
         perspective: "1600px",
         animation: isStriking
           ? `${shakeKey % 2 === 0 ? "tl-shake" : "tl-shake-alt"} .45s cubic-bezier(.36,.07,.19,.97)`
@@ -535,7 +535,7 @@ export default function ThunderLoader({ onDone }) {
             animation: isShatter ? "tl-behind-in .8s cubic-bezier(.16,1,.3,1) .5s both" : "none",
           }}>VISHAN RABARI</div>
           <div style={{
-            fontFamily: "'DM Mono',monospace", fontSize: 11, letterSpacing: ".32em",
+            fontFamily: "'JetBrains Mono',monospace", fontSize: 11, letterSpacing: ".32em",
             textTransform: "uppercase", color: "rgba(167,139,250,.55)",
             animation: isShatter ? "tl-behind-in .8s cubic-bezier(.16,1,.3,1) .6s both" : "none",
           }}>Portfolio Ready</div>
@@ -602,7 +602,7 @@ function SideLabel({ side, text }) {
       display: "flex",
       alignItems: "center",
       gap: 8,
-      fontFamily: "'DM Mono',monospace",
+      fontFamily: "'JetBrains Mono',monospace",
       fontSize: 10,
       letterSpacing: ".22em",
       textTransform: "uppercase",

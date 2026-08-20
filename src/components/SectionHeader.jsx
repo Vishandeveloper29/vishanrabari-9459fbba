@@ -57,7 +57,7 @@ const SectionHeader = ({
     </h2>
     {sub && (
       <p style={{
-        fontFamily: "'Outfit', sans-serif",
+        fontFamily: "'DM Sans', sans-serif",
         fontSize: "clamp(14px,1.4vw,17px)",
         color: "rgba(232,236,240,0.45)",
         marginTop: 16, lineHeight: 1.8,

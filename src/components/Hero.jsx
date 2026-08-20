@@ -10,16 +10,16 @@ import { BtnPrimary, BtnGhost, BtnMagnetic } from "./ui/PortfolioButtons";
 const roles = [
   { label: "Frontend Developer", color: "#38bdf8" },
   { label: "React UI Builder",   color: "#a78bfa" },
-  { label: "3D Web Creator",     color: "#34d399" },
-  { label: "Dark Glass UI",      color: "#f472b6" },
-  { label: "Open to Work ✦",    color: "#fbbf24" },
+  { label: "3D Web Creator",     color: "#22d3ee" },
+  { label: "Dark Glass UI",      color: "#818cf8" },
+  { label: "Open to Work ✦",    color: "#38bdf8" },
 ];
 
 const stats = [
   { icon: GitBranch,         value: "41+", label: "GitHub Repos",  color: "#38bdf8", rgb: "56,189,248"   },
   { icon: Code2,             value: "7+",  label: "Live Projects",  color: "#a78bfa", rgb: "167,139,250"  },
-  { icon: Sparkles,          value: "3D",  label: "Web Effects",    color: "#34d399", rgb: "52,211,153"   },
-  { icon: MonitorSmartphone, value: "UI",  label: "Responsive",     color: "#f472b6", rgb: "244,114,182"  },
+  { icon: Sparkles,          value: "3D",  label: "Web Effects",    color: "#22d3ee", rgb: "34,211,238"   },
+  { icon: MonitorSmartphone, value: "UI",  label: "Responsive",     color: "#818cf8", rgb: "129,140,248"  },
 ];
 
 const marqueeItems = [
@@ -139,9 +139,9 @@ export default function Hero() {
     >
       {/* ── STYLES ── */}
       <style>{`
-        .hero-mono { font-family:'DM Mono',monospace; }
+        .hero-mono { font-family:'JetBrains Mono',monospace; }
         .hero-bb   { font-family:'Bebas Neue',sans-serif; }
-        .hero-sg   { font-family:'Space Grotesk',sans-serif; }
+        .hero-sg   { font-family:'DM Sans',sans-serif; }
 
         /* ---- Gradient name ---- */
         .name-grad {
@@ -185,7 +185,7 @@ export default function Hero() {
               transparent 0%,
               rgba(129,140,248,.6) 20%,
               rgba(56,189,248,.4) 40%,
-              rgba(52,211,153,.3) 60%,
+              rgba(34,211,238,.3) 60%,
               transparent 80%) border-box;
           border: 1px solid transparent;
           animation: stat-border 5s linear infinite;
@@ -303,7 +303,7 @@ export default function Hero() {
         />
         <div
           className="absolute -right-20 bottom-0 h-[350px] w-[350px] opacity-15 sm:opacity-25"
-          style={{ background: "radial-gradient(circle,rgba(52,211,153,.3) 0%,transparent 70%)", filter: "blur(50px)" }}
+          style={{ background: "radial-gradient(circle,rgba(34,211,238,.3) 0%,transparent 70%)", filter: "blur(50px)" }}
         />
       </div>
 
@@ -315,9 +315,9 @@ export default function Hero() {
         {[
           { cls: "chip-a left-[5%] top-[20%]",       icon: Terminal, label: "React",    color: "#38bdf8", border: "rgba(56,189,248,.2)",  bg: "rgba(56,189,248,.06)"  },
           { cls: "chip-b right-[6%] top-[24%]",       icon: Globe,    label: "Tailwind", color: "#a78bfa", border: "rgba(167,139,250,.2)", bg: "rgba(167,139,250,.06)" },
-          { cls: "chip-c right-[10%] bottom-[24%]",   icon: Sparkles, label: "Vite",     color: "#34d399", border: "rgba(52,211,153,.2)",  bg: "rgba(52,211,153,.06)"  },
-          { cls: "chip-d left-[8%] bottom-[26%]",     icon: Code2,    label: "JS",       color: "#fbbf24", border: "rgba(251,191,36,.2)",  bg: "rgba(251,191,36,.06)"  },
-          { cls: "chip-b left-[3%] top-[48%]",        icon: Layers,   label: "WebGL",    color: "#f472b6", border: "rgba(244,114,182,.2)", bg: "rgba(244,114,182,.06)" },
+          { cls: "chip-c right-[10%] bottom-[24%]",   icon: Sparkles, label: "Vite",     color: "#22d3ee", border: "rgba(34,211,238,.2)",  bg: "rgba(34,211,238,.06)"  },
+          { cls: "chip-d left-[8%] bottom-[26%]",     icon: Code2,    label: "JS",       color: "#38bdf8", border: "rgba(56,189,248,.2)",  bg: "rgba(56,189,248,.06)"  },
+          { cls: "chip-b left-[3%] top-[48%]",        icon: Layers,   label: "WebGL",    color: "#818cf8", border: "rgba(129,140,248,.2)", bg: "rgba(129,140,248,.06)" },
           { cls: "chip-c right-[4%] top-[52%]",       icon: Star,     label: "Three.js", color: "#818cf8", border: "rgba(129,140,248,.2)", bg: "rgba(129,140,248,.06)" },
         ].map(({ cls, icon: Icon, label, color, border, bg }) => (
           <div key={label} className={`absolute ${cls} hidden lg:block`}>
@@ -345,7 +345,7 @@ export default function Hero() {
         {/* Available badge */}
         <div
           style={fu(0)}
-          className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/25 bg-emerald-400/[0.06] px-4 py-2 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/45 hover:bg-emerald-400/[0.1] hover:shadow-[0_0_24px_rgba(52,211,153,.18)]"
+          className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/25 bg-emerald-400/[0.06] px-4 py-2 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/45 hover:bg-emerald-400/[0.1] hover:shadow-[0_0_24px_rgba(34,211,238,.18)]"
         >
           <span className="relative flex h-2 w-2">
             <span
@@ -559,7 +559,7 @@ export default function Hero() {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-red-500/70 shadow-[0_0_8px_rgba(239,68,68,.4)]" />
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70 shadow-[0_0_8px_rgba(234,179,8,.3)]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 shadow-[0_0_8px_rgba(52,211,153,.3)]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70 shadow-[0_0_8px_rgba(34,211,238,.3)]" />
             <span className="hero-mono ml-1.5 text-[8px] font-bold uppercase tracking-[0.2em] text-white/20 sm:ml-2 sm:text-[9px]">
               vishan@portfolio
             </span>
@@ -583,8 +583,8 @@ export default function Hero() {
             {[
               { k: "stack",    v: "React · Tailwind · Vite",  c: "#38bdf8" },
               { k: "effects",  v: "Three.js · WebGL · GSAP",  c: "#a78bfa" },
-              { k: "projects", v: "7+ Live · 41+ Repos",      c: "#34d399" },
-              { k: "status",   v: "Open to Work ✓",           c: "#fbbf24" },
+              { k: "projects", v: "7+ Live · 41+ Repos",      c: "#22d3ee" },
+              { k: "status",   v: "Open to Work ✓",           c: "#38bdf8" },
             ].map(({ k, v, c }) => (
               <div
                 key={k}
@@ -631,11 +631,11 @@ export default function Hero() {
                 style={{
                   color:
                     it === "Open To Work"
-                      ? "#34d399"
+                      ? "#22d3ee"
                       : it === "·"
                       ? "rgba(255,255,255,.07)"
                       : "rgba(203,213,225,.2)",
-                  textShadow: it === "Open To Work" ? "0 0 12px rgba(52,211,153,.4)" : "none",
+                  textShadow: it === "Open To Work" ? "0 0 12px rgba(34,211,238,.4)" : "none",
                 }}
               >
                 {it}

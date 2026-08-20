@@ -11,7 +11,7 @@ import { BtnPrimary, BtnMagnetic } from "./ui/PortfolioButtons";
    ════════════════════════════════════════════════════════════════════════ */
 const T = {
   display: "'Bebas Neue', 'Arial Narrow', sans-serif",
-  heading: "'Syne', sans-serif",
+  heading: "'Bebas Neue', sans-serif",
   body:    "'DM Sans', sans-serif",
   mono:    "'JetBrains Mono', monospace",
   ease:    "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -34,10 +34,10 @@ const STATS = [
 const SKILLS = [
   { name: "React",          level: 92, color: "0,212,255"   },
   { name: "Tailwind CSS",   level: 95, color: "56,189,248"  },
-  { name: "JavaScript",     level: 88, color: "251,191,36"  },
+  { name: "JavaScript",     level: 88, color: "56,189,248"  },
   { name: "UI Design",      level: 90, color: "167,139,250" },
   { name: "Vite",           level: 85, color: "99,102,241"  },
-  { name: "Node.js",        level: 72, color: "74,222,128"  },
+  { name: "Node.js",        level: 72, color: "56,189,248"  },
 ];
 
 const TICKER_ITEMS = [
@@ -49,7 +49,7 @@ const TICKER_ITEMS = [
 const SERVICES = [
   { icon: Code2,            title: "Frontend Dev",  desc: "React · Tailwind · Vite · Responsive",    c: "0,212,255"   },
   { icon: Layers3,          title: "UI Craft",      desc: "Glass · Motion · Hover · Premium UX",     c: "167,139,250" },
-  { icon: BriefcaseBusiness,title: "Management",   desc: "Client work · Projects · Delivery",        c: "251,191,36"  },
+  { icon: BriefcaseBusiness,title: "Management",   desc: "Client work · Projects · Delivery",        c: "56,189,248"  },
 ];
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -254,7 +254,7 @@ const ProfileCard = () => {
 
           {/* Top badges */}
           <div style={{ position: "absolute", top: 18, left: 18, zIndex: 20, display: "flex", alignItems: "center", gap: 7, padding: "7px 14px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(20px)" }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px rgba(74,222,128,0.9)", display: "inline-block" }} />
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#38bdf8", boxShadow: "0 0 8px rgba(56,189,248,0.9)", display: "inline-block" }} />
             <span style={{ fontFamily: T.mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>Open to Work</span>
           </div>
 
@@ -419,8 +419,8 @@ export default function About() {
           }}>
             <div style={{
               marginTop: 5, width: 10, height: 10, flexShrink: 0, borderRadius: "50%",
-              background: job.active ? "#4ade80" : "rgba(255,255,255,0.18)",
-              boxShadow: job.active ? "0 0 10px rgba(74,222,128,0.8)" : "none",
+              background: job.active ? "#38bdf8" : "rgba(255,255,255,0.18)",
+              boxShadow: job.active ? "0 0 10px rgba(56,189,248,0.8)" : "none",
             }} />
             <div>
               <p style={{ fontFamily: T.body, fontSize: 13.5, fontWeight: 700, color: "#fff", margin: 0 }}>{job.role}</p>
@@ -436,7 +436,7 @@ export default function About() {
   return (
     <section id="about" style={{ position: "relative", overflow: "hidden", background: "#04031a", color: "#fff", padding: "clamp(70px,10vw,100px) clamp(16px,4vw,40px) clamp(60px,8vw,80px)" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
         #about *, #about *::before, #about *::after { box-sizing: border-box; }
 

@@ -15,20 +15,20 @@ const frontendSkills = [
 const threeDWebSkills = [
   { name: "Three.js",    type: "3D Library",   icon: Sparkles, color: "#a78bfa", rgb: "167,139,250" },
   { name: "3D Websites", type: "Creative Web", icon: Globe,    color: "#38bdf8", rgb: "56,189,248" },
-  { name: "Blender",     type: "3D Design",    icon: Sparkles, color: "#fb923c", rgb: "251,146,60" },
+  { name: "Blender",     type: "3D Design",    icon: Sparkles, color: "#3b82f6", rgb: "59,130,246" },
   { name: "WebGL",       type: "Browser 3D",   icon: Zap,      color: "#22d3ee", rgb: "34,211,238" },
 ];
 const programmingSkills = [
   { name: "JavaScript", type: "Language",    icon: Zap,      color: "#facc15", rgb: "250,204,21" },
   { name: "Python",     type: "Language",    icon: Terminal, color: "#60a5fa", rgb: "96,165,250" },
   { name: "SQL",        type: "Database",    icon: Terminal, color: "#22d3ee", rgb: "34,211,238" },
-  { name: "C Language", type: "Programming", icon: Code2,    color: "#22c55e", rgb: "34,197,94" },
+  { name: "C Language", type: "Programming", icon: Code2,    color: "#0ea5e9", rgb: "14,165,233" },
   { name: "REST APIs",  type: "Integration", icon: Globe,    color: "#c084fc", rgb: "192,132,252" },
 ];
 const tools = [
   { name: "VS Code", icon: Code2,      color: "#22d3ee", rgb: "34,211,238" },
-  { name: "CLI",     icon: Terminal,   color: "#22c55e", rgb: "34,197,94" },
-  { name: "Git",     icon: GitBranch,  color: "#f472b6", rgb: "244,114,182" },
+  { name: "CLI",     icon: Terminal,   color: "#0ea5e9", rgb: "14,165,233" },
+  { name: "Git",     icon: GitBranch,  color: "#818cf8", rgb: "129,140,248" },
   { name: "Vite",    icon: Zap,        color: "#f59e0b", rgb: "245,158,11" },
   { name: "GitHub",  icon: GitBranch,  color: "#a78bfa", rgb: "167,139,250" },
   { name: "Deploy",  icon: Globe,      color: "#38bdf8", rgb: "56,189,248" },
@@ -95,19 +95,19 @@ const BgLanguageSVGs = memo(() => (
 
     {/* Blender tris — center top */}
     <g transform="translate(45%, 2%)" opacity="0.04" filter="url(#bg-blur-md)">
-      <polygon points="36,4 68,60 4,60" fill="none" stroke="#fb923c" strokeWidth="2.5"/>
-      <polygon points="36,18 56,52 16,52" fill="none" stroke="#fb923c" strokeWidth="1.5" opacity="0.7"/>
-      <polygon points="36,30 48,50 24,50" fill="#fb923c" opacity="0.3"/>
+      <polygon points="36,4 68,60 4,60" fill="none" stroke="#3b82f6" strokeWidth="2.5"/>
+      <polygon points="36,18 56,52 16,52" fill="none" stroke="#3b82f6" strokeWidth="1.5" opacity="0.7"/>
+      <polygon points="36,30 48,50 24,50" fill="#3b82f6" opacity="0.3"/>
     </g>
 
     {/* Git branch diagram — center-left */}
     <g transform="translate(6%, 52%)" opacity="0.044" filter="url(#bg-blur)">
-      <circle cx="16" cy="12" r="7" fill="none" stroke="#f472b6" strokeWidth="2"/>
-      <circle cx="16" cy="60" r="7" fill="none" stroke="#f472b6" strokeWidth="2"/>
-      <circle cx="52" cy="36" r="7" fill="none" stroke="#f472b6" strokeWidth="2"/>
-      <line x1="16" y1="19" x2="16" y2="53" stroke="#f472b6" strokeWidth="2"/>
-      <path d="M16,19 Q16,30 52,30" fill="none" stroke="#f472b6" strokeWidth="2"/>
-      <path d="M52,42 Q52,53 16,53" fill="none" stroke="#f472b6" strokeWidth="2"/>
+      <circle cx="16" cy="12" r="7" fill="none" stroke="#818cf8" strokeWidth="2"/>
+      <circle cx="16" cy="60" r="7" fill="none" stroke="#818cf8" strokeWidth="2"/>
+      <circle cx="52" cy="36" r="7" fill="none" stroke="#818cf8" strokeWidth="2"/>
+      <line x1="16" y1="19" x2="16" y2="53" stroke="#818cf8" strokeWidth="2"/>
+      <path d="M16,19 Q16,30 52,30" fill="none" stroke="#818cf8" strokeWidth="2"/>
+      <path d="M52,42 Q52,53 16,53" fill="none" stroke="#818cf8" strokeWidth="2"/>
     </g>
 
     {/* Vite lightning — top center-left */}
@@ -116,7 +116,7 @@ const BgLanguageSVGs = memo(() => (
       <polygon points="44,0 20,40 36,40 28,72 60,28 42,28 56,0" fill="url(#vite-fade)" opacity="0.5"/>
       <defs>
         <linearGradient id="vite-fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fbbf24"/>
+          <stop offset="0%" stopColor="#38bdf8"/>
           <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.4"/>
         </linearGradient>
       </defs>
@@ -124,9 +124,9 @@ const BgLanguageSVGs = memo(() => (
 
     {/* C language brackets — right mid */}
     <g transform="translate(89%, 52%)" opacity="0.05" filter="url(#bg-blur)">
-      <text x="0" y="52" fontFamily="monospace" fontWeight="900" fontSize="60" fill="#22c55e" opacity="0.9">C</text>
-      <text x="34" y="28" fontFamily="monospace" fontWeight="400" fontSize="20" fill="#22c55e" opacity="0.5">{"{"}</text>
-      <text x="34" y="52" fontFamily="monospace" fontWeight="400" fontSize="20" fill="#22c55e" opacity="0.5">{"}"}</text>
+      <text x="0" y="52" fontFamily="monospace" fontWeight="900" fontSize="60" fill="#0ea5e9" opacity="0.9">C</text>
+      <text x="34" y="28" fontFamily="monospace" fontWeight="400" fontSize="20" fill="#0ea5e9" opacity="0.5">{"{"}</text>
+      <text x="34" y="52" fontFamily="monospace" fontWeight="400" fontSize="20" fill="#0ea5e9" opacity="0.5">{"}"}</text>
     </g>
 
     {/* Tailwind wave — bottom center */}
@@ -147,9 +147,9 @@ const BgLanguageSVGs = memo(() => (
       {cx:"20%", cy:"20%", r:1.5, c:"#6366f1", dur:7},
       {cx:"75%", cy:"15%", r:1,   c:"#38bdf8", dur:9},
       {cx:"15%", cy:"75%", r:2,   c:"#a78bfa", dur:6},
-      {cx:"80%", cy:"80%", r:1.5, c:"#f472b6", dur:8},
+      {cx:"80%", cy:"80%", r:1.5, c:"#818cf8", dur:8},
       {cx:"50%", cy:"50%", r:1,   c:"#facc15", dur:11},
-      {cx:"35%", cy:"88%", r:1.5, c:"#34d399", dur:7.5},
+      {cx:"35%", cy:"88%", r:1.5, c:"#22d3ee", dur:7.5},
       {cx:"65%", cy:"92%", r:1,   c:"#38bdf8", dur:9.5},
     ].map((p,i) => (
       <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill={p.c} opacity="0.35">
@@ -165,11 +165,11 @@ const BgLanguageSVGs = memo(() => (
       <circle cx="30" cy="150" r="2" fill="#6366f1" opacity="0.6"/>
       <circle cx="20" cy="250" r="2" fill="#818cf8" opacity="0.5"/>
     </g>
-    <g opacity="0.06" stroke="#34d399" strokeWidth="0.7" fill="none" transform="translate(100%,0) scale(-1,1)">
+    <g opacity="0.06" stroke="#22d3ee" strokeWidth="0.7" fill="none" transform="translate(100%,0) scale(-1,1)">
       <path d="M0,200 L40,200 L40,170 L90,170"/>
       <path d="M0,350 L25,350 L25,310 L70,310"/>
-      <circle cx="40" cy="200" r="2" fill="#34d399" opacity="0.6"/>
-      <circle cx="25" cy="350" r="2" fill="#34d399" opacity="0.5"/>
+      <circle cx="40" cy="200" r="2" fill="#22d3ee" opacity="0.6"/>
+      <circle cx="25" cy="350" r="2" fill="#22d3ee" opacity="0.5"/>
     </g>
 
     {/* Scanning horizontal line */}
@@ -181,7 +181,7 @@ const BgLanguageSVGs = memo(() => (
         <stop offset="0%" stopColor="transparent"/>
         <stop offset="25%" stopColor="rgba(56,189,248,0.5)"/>
         <stop offset="50%" stopColor="rgba(99,102,241,0.8)"/>
-        <stop offset="75%" stopColor="rgba(52,211,153,0.5)"/>
+        <stop offset="75%" stopColor="rgba(34,211,238,0.5)"/>
         <stop offset="100%" stopColor="transparent"/>
       </linearGradient>
     </defs>
@@ -301,7 +301,7 @@ const SkillOrb = ({ skill, delay = 0 }) => {
           />
           <h3 style={{
             marginTop: 14,
-            fontFamily: "'Space Grotesk',sans-serif",
+            fontFamily: "'DM Sans',sans-serif",
             fontSize: "clamp(9px,1.1vw,11px)",
             fontWeight: 900, textTransform: "uppercase",
             letterSpacing: "0.12em", color: "#fff",
@@ -315,7 +315,7 @@ const SkillOrb = ({ skill, delay = 0 }) => {
       {/* Type label */}
       <p style={{
         marginTop: 14,
-        fontFamily: "'DM Mono',monospace",
+        fontFamily: "'JetBrains Mono',monospace",
         fontSize: "clamp(8px,0.9vw,10px)",
         fontWeight: 700, textTransform: "uppercase",
         letterSpacing: "0.34em",
@@ -332,7 +332,7 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
   const themeMap = {
     cyan:   { color: "rgba(34,211,238,0.35)", bg: "rgba(34,211,238,0.08)", text: "#22d3ee" },
     purple: { color: "rgba(167,139,250,0.35)", bg: "rgba(167,139,250,0.08)", text: "#a78bfa" },
-    green:  { color: "rgba(34,197,94,0.35)",  bg: "rgba(34,197,94,0.08)",  text: "#22c55e" },
+    green:  { color: "rgba(14,165,233,0.35)",  bg: "rgba(14,165,233,0.08)",  text: "#0ea5e9" },
   };
   const t = themeMap[theme];
   const RowIcon = title === "3D Web" ? Sparkles : title === "Programming" ? Terminal : Code2;
@@ -364,7 +364,7 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
           <RowIcon size={17} style={{ color: t.text }}/>
         </div>
         <h3 style={{
-          fontFamily: "'Space Grotesk',sans-serif",
+          fontFamily: "'DM Sans',sans-serif",
           fontSize: "clamp(16px,2.2vw,22px)",
           fontWeight: 900, textTransform: "uppercase",
           letterSpacing: "0.15em", color: "#fff", margin: 0,
@@ -373,7 +373,7 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
         </h3>
         {/* Index marker */}
         <span style={{
-          fontFamily: "'DM Mono',monospace", fontSize: 9, fontWeight: 700,
+          fontFamily: "'JetBrains Mono',monospace", fontSize: 9, fontWeight: 700,
           letterSpacing: "0.4em", textTransform: "uppercase",
           color: `${t.text}88`, marginLeft: 8,
         }}>{index}</span>
@@ -453,7 +453,7 @@ const ToolCard = ({ tool, delay }) => {
         }}
       />
       <span style={{
-        fontFamily: "'Space Grotesk',sans-serif", fontSize: 11, fontWeight: 700,
+        fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 700,
         color: hov ? "#fff" : "rgba(255,255,255,0.4)",
         transition: "color 0.3s ease",
         textShadow: hov ? `0 0 16px ${tool.color}` : "none",
@@ -504,7 +504,7 @@ const CTACard = () => {
         }}>Real?</span>
       </h2>
       <p style={{
-        fontFamily: "'Space Grotesk',sans-serif",
+        fontFamily: "'DM Sans',sans-serif",
         fontSize: "clamp(13px,1.5vw,15px)",
         lineHeight: 1.8, color: "rgba(255,255,255,.35)",
         maxWidth: 420, margin: "0 auto 32px",
@@ -519,7 +519,7 @@ const CTACard = () => {
           display: "inline-flex", alignItems: "center", gap: 10,
           padding: "14px 36px", borderRadius: 14,
           background: hov ? "#38bef8" : "#0ea5e9",
-          fontFamily: "'Space Grotesk',sans-serif",
+          fontFamily: "'DM Sans',sans-serif",
           fontSize: 14, fontWeight: 900, color: "#fff",
           textDecoration: "none",
           boxShadow: hov
@@ -643,7 +643,7 @@ const Skills = () => (
             background: "rgba(34,211,238,0.06)", backdropFilter: "blur(16px)",
           }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22d3ee", boxShadow: "0 0 8px rgba(34,211,238,0.9)", animation: "skills-pulse 2s ease-in-out infinite" }}/>
-            <span style={{ fontFamily: "'DM Mono',monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(103,232,249,0.85)" }}>Tech Stack</span>
+            <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(103,232,249,0.85)" }}>Tech Stack</span>
           </div>
 
           <h2 style={{
@@ -660,7 +660,7 @@ const Skills = () => (
           </h2>
 
           <p style={{
-            fontFamily: "'Space Grotesk',sans-serif",
+            fontFamily: "'DM Sans',sans-serif",
             fontSize: "clamp(13px,1.5vw,15px)",
             fontWeight: 500, color: "rgba(255,255,255,.32)",
             maxWidth: 480, margin: "18px auto 0", lineHeight: 1.8,
@@ -684,7 +684,7 @@ const Skills = () => (
           background: "rgba(255,255,255,0.025)", backdropFilter: "blur(16px)",
         }}>
           <Sparkles size={14} style={{ color: "#22d3ee" }}/>
-          <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 11, fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.14em", color: "rgba(255,255,255,0.75)" }}>
+          <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.14em", color: "rgba(255,255,255,0.75)" }}>
             Tools & Platforms
           </span>
         </div>

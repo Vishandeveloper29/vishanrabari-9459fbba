@@ -4,13 +4,13 @@ import { ArrowUpRight, Mail, MapPin, Send, GitBranch, Zap, Radio, Play, Briefcas
 
 /* ─── Tokens ─────────────────────────────────────────────────────────── */
 const T = {
-    mono: "'Share Tech Mono', 'Courier New', monospace",
-    display: "'Barlow Condensed', 'Arial Narrow', sans-serif",
+    mono: "'JetBrains Mono', 'Courier New', monospace",
+    display: "'Bebas Neue', 'Arial Narrow', sans-serif",
     body: "'DM Sans', sans-serif",
     ease: "cubic-bezier(0.16, 1, 0.3, 1)",
     teal: "#00ffe7",
     purple: "#bf5af2",
-    orange: "#ff6b35",
+    orange: "#3b82f6",
     red: "#ff3b30",
     dim: "rgba(0,255,231,0.12)",
 };
@@ -22,7 +22,7 @@ const CARDS = [
     { id: "LI", icon: Briefcase, label: "LINKEDIN", value: "vishan-rabari", href: "https://www.linkedin.com/in/vishan-rabari-7634ab392", color: "#60a5fa", rgb: "96,165,250", signal: "PROFESSIONAL" },
     { id: "IG", icon: Camera, label: "INSTAGRAM", value: "@vishandev.js", href: "https://www.instagram.com/vishandev.js", color: "#a78bfa", rgb: "167,139,250", signal: "BEHIND THE SCENES" },
     { id: "YT", icon: Play, label: "YOUTUBE", value: "@VKFreelancer29", href: "https://www.youtube.com/@VKFreelancer29", color: "#38bdf8", rgb: "56,189,248", signal: "WATCH BUILDS" },
-    { id: "LOC", icon: MapPin, label: "LOCATION", value: "Gandhidham, India", href: "#contact", color: T.orange, rgb: "255,107,53", signal: "REMOTE READY" },
+    { id: "LOC", icon: MapPin, label: "LOCATION", value: "Gandhidham, India", href: "#contact", color: T.orange, rgb: "59,130,246", signal: "REMOTE READY" },
 ];
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -340,19 +340,36 @@ const Contact = () => {
         return () => clearTimeout(t);
     }, [charIdx]);
 
-    const handleSubmit = (e) => {
+    const [sendResult, setSendResult] = useState(null); // null | "success" | "error"
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSending(true);
+        setSendResult(null);
         const form = new FormData(e.currentTarget);
-        const name = form.get("name");
-        const email = form.get("email");
-        const message = form.get("message");
-        const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-        setTimeout(() => {
-            window.location.href = `mailto:rabarivishan2@gmail.com?subject=${subject}&body=${body}`;
+        form.append("access_key", "63bb5bdf-7d18-4afd-a1f5-5572f5ae1489");
+        form.append("subject", `Portfolio Contact from ${form.get("name")}`);
+        form.append("from_name", "Vishan Rabari Portfolio");
+
+        try {
+            const res = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: { Accept: "application/json" },
+                body: form,
+            });
+            const data = await res.json();
+            if (data.success) {
+                setSendResult("success");
+                e.currentTarget.reset();
+            } else {
+                setSendResult("error");
+            }
+        } catch {
+            setSendResult("error");
+        } finally {
             setSending(false);
-        }, 700);
+            setTimeout(() => setSendResult(null), 5000);
+        }
     };
 
     return (
@@ -363,7 +380,7 @@ const Contact = () => {
             padding: "clamp(60px,9vw,96px) clamp(14px,4vw,28px) clamp(70px,9vw,110px)",
         }}>
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
         #contact *, #contact *::before, #contact *::after { box-sizing: border-box; }
 
         @keyframes ct-sweep { 0%{transform:translateX(-100%)} 100%{transform:translateX(100vw)} }
@@ -379,7 +396,7 @@ const Contact = () => {
 
         #contact input::placeholder, #contact textarea::placeholder {
           color: rgba(255,255,255,0.12);
-          font-family: 'Share Tech Mono', monospace;
+          font-family: 'JetBrains Mono', monospace;
           letter-spacing: 0.04em;
         }
         #contact input:focus, #contact textarea:focus { outline: none; }
@@ -596,8 +613,11 @@ const Contact = () => {
                                         }
                                     </button>
 
-                                    <span style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.2em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>
-                                        · OPENS MAIL CLIENT
+                                    <span style={{
+                                        fontFamily: T.mono, fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase",
+                                        color: sendResult === "success" ? "#38bdf8" : sendResult === "error" ? "#f87171" : "rgba(255,255,255,0.18)",
+                                    }}>
+                                        {sendResult === "success" ? "✓ MESSAGE DELIVERED" : sendResult === "error" ? "⚠ FAILED — TRY AGAIN" : "· DELIVERS DIRECTLY TO INBOX"}
                                     </span>
                                 </div>
                             </form>
