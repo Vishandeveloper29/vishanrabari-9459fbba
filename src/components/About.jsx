@@ -487,7 +487,7 @@ export default function About() {
           </div>
 
           {/* Massive headline */}
-          <div style={{ position: "relative", display: "inline-block" }}>
+          <div style={{ position: "relative", display: "inline-block", transform: "skewY(-3deg) rotate(-1.5deg)" }}>
             <h2 style={{
               fontFamily: T.display,
               fontSize: "clamp(4.5rem, 12vw, 11rem)",
