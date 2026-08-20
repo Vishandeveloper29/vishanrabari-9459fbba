@@ -46,8 +46,8 @@ export default function Footer() {
           <div className="mt-6 flex items-center gap-2.5">
             {[
               { label:"GH", href:"https://github.com/Vishandeveloper29", target:"_blank" },
-              { label:"in", href:"#contact" },
-              { label:"IG", href:"#contact" },
+              { label:"in", href:"https://www.linkedin.com/in/vishan-rabari-7634ab392", target:"_blank" },
+              { label:"IG", href:"https://www.instagram.com/vishandev.js", target:"_blank" },
             ].map(l => (
               <a key={l.label} href={l.href} target={l.target} rel={l.target?"noreferrer":undefined}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-[11px] font-black text-white transition-all hover:border-blue-300/60 hover:text-blue-200 hover:shadow-[0_0_14px_rgba(96,165,250,.2)]">

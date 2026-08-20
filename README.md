@@ -1,72 +1,98 @@
-# Vishan Rabari - Frontend Developer Portfolio
+<div align="center">
 
-A modern, interactive portfolio website built with React, Vite, and Tailwind CSS. Featuring smooth animations, responsive design, and engaging user interactions.
+# ⚡ Vishan Rabari — Frontend Developer
 
-🌐 **Live Portfolio:** [vishandeveloper.me](https://vishandeveloper.me)
+**A modern, interactive portfolio built with React, Vite, and Tailwind CSS — animated, responsive, and fast.**
+
+🌐 **Live:** [vishandeveloper.me](https://vishandeveloper.me) &nbsp;•&nbsp;
+📺 **YouTube:** [@VKFreelancer29](https://www.youtube.com/@VKFreelancer29) &nbsp;•&nbsp;
+🤝 **Agency:** [KV Agency](https://www.instagram.com/kvagency.dev/)
+
+</div>
+
+---
+
+## ⚡ Tech Arsenal
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,js,ts,react,vite,tailwind,bootstrap,nodejs,express,mysql,threejs,figma,git,github,vscode,npm,python,linux" />
+</p>
+
+| Category | Stack |
+|---|---|
+| **Languages** | JavaScript, Python, C, SQL |
+| **Frontend** | React 19, Tailwind CSS 4, Bootstrap, Responsive UI |
+| **Animation / 3D** | Framer Motion, Motion, Three.js, WebGL, Blender |
+| **Tooling** | Vite, Git, GitHub, VS Code, npm |
+| **Deploy** | Vercel |
+
+---
 
 ## ✨ Features
 
-- **Hero Section** - Eye-catching introduction with animated text
-- **About** - Personal background and introduction
-- **Services** - Showcase of services offered
-- **Projects** - Interactive project gallery with image tabs
-- **Skills** - Technical skills and expertise
-- **Journey** - Career timeline and milestones
-- **Contact** - Get in touch section
-- **Responsive Design** - Fully mobile-friendly interface
-- **Smooth Animations** - Powered by Framer Motion
-- **Modern UI** - Built with Tailwind CSS
-- **Interactive Components** - Hover effects, transitions, and more
+- **Hero** — animated introduction with a custom thunder-themed loader
+- **About** — background, stats, and quick links (Ayik Solution, KV Agency)
+- **Services** — what I offer as a frontend developer
+- **Projects** — interactive project switcher with live links and repos
+- **Skills** — categorized tech stack with animated orbs
+- **Journey** — career timeline
+- **Contact** — direct channels: email, GitHub, YouTube, location
+
+Design language: a single **dark blue/cyan "thunder" theme** throughout — no mismatched multi-color sections, fast-loading (image-optimized, code-split), fully responsive from mobile to desktop.
+
+---
+
+## 🧩 Featured Projects
+
+| Project | Type | Link |
+|---|---|---|
+| **DMLoop** | Instagram automation SaaS (built with KV Agency) | [dmloop.app](https://www.dmloop.app/) |
+| **EventCure** | Event operations platform (built with KV Agency) | [eventcure-livid.vercel.app](https://eventcure-livid.vercel.app/) |
+| **TrueBuild Deck & Turf** | Business website | [truebuilddeck.vercel.app](https://truebuilddeck.vercel.app/) |
+| **Kamdhenu Gau Seva** | Authority / trust page | [kamdhenugauseva.vercel.app](https://kamdhenugauseva.vercel.app/) |
+| **BMW 3D Model Viewer** | 3D product viewer | [bmw3dmodelviewer.vercel.app](https://bmw3dmodelviewer.vercel.app/) |
+
+---
 
 ## 🚀 Tech Stack
 
-- **React 19** - UI library
-- **Vite 8** - Build tool and dev server
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **Framer Motion** - Animation library
-- **Lucide React** - Icon library
-- **Motion** - Advanced animation utilities
-- **Vaul** - Drawer component library
+- **React 19** — UI library
+- **Vite** — build tool and dev server
+- **Tailwind CSS 4** — utility-first styling
+- **Motion** — animation library
+- **Lucide React** — icon library
+- **Vaul** — drawer component library
 
 ## 📦 Installation
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Vishandeveloper29/vishanrabari-9459fbba.git
 cd vishanrabari-9459fbba
-```
-
-2. Install dependencies:
-```bash
 npm install
 ```
 
 ## 🔧 Development
 
-Start the development server:
 ```bash
 npm run dev
 ```
 
-The site will be available at `http://localhost:5173` (or the port shown in your terminal).
+Runs at `http://localhost:5173` (or the port shown in your terminal).
 
 ## 🏗️ Build
 
-Create an optimized production build:
 ```bash
 npm run build
 ```
 
 ## 📊 Preview
 
-Preview the production build locally:
 ```bash
 npm run preview
 ```
 
 ## 🔍 Linting
 
-Check code quality:
 ```bash
 npm run lint
 ```
@@ -99,6 +125,7 @@ src/
 │   ├── SectionHeader.jsx             # Section header component
 │   ├── Services.jsx                  # Services section
 │   ├── Skills.jsx                    # Skills section
+│   ├── ThunderLoader.jsx             # Custom canvas loading screen
 │   └── TerminalStats.jsx             # Terminal-style stats display
 ├── main.jsx                          # React entry point
 └── App.jsx                           # Root component
@@ -106,21 +133,38 @@ src/
 
 ## 🎨 Design Features
 
-- **Dark Theme** - Modern dark interface with white text
-- **Blur Effects** - Section transitions with blur blend effects
-- **Grid Background** - Subtle grid scan backgrounds
-- **Interactive Hover States** - Button hover animations with directional effects
-- **Neural Network Vortex** - Advanced animated background
-- **Sticky Scroll Reveal** - Content reveals on scroll
+- **Single Dark Theme** — cohesive blue/cyan "thunder" palette, no clashing multi-color sections
+- **Blur Effects** — section transitions with blur blend effects
+- **Grid Background** — subtle grid scan backgrounds
+- **Interactive Hover States** — button hover animations with directional effects
+- **Sticky Scroll Reveal** — content reveals on scroll
+- **Optimized Loader** — lightweight canvas-based thunder loader, no heavy assets
+
+## ⚙️ Performance & SEO
+
+- All images served as compressed **WebP**
+- Below-the-fold sections are **code-split** with `React.lazy`
+- Full meta tags, Open Graph, Twitter cards, JSON-LD structured data
+- `robots.txt` + `sitemap.xml` included for search engine indexing
 
 ## 🛠️ Development Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+| Script            | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
 | `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+| `npm run lint`    | Run ESLint               |
+
+## 🔗 Links
+
+- 🌐 Portfolio: [vishandeveloper.me](https://vishandeveloper.me)
+- 💻 GitHub: [github.com/Vishandeveloper29](https://github.com/Vishandeveloper29)
+- 💼 LinkedIn: [vishan-rabari](https://www.linkedin.com/in/vishan-rabari-7634ab392)
+- 📸 Instagram: [@vishandev.js](https://www.instagram.com/vishandev.js)
+- 📺 YouTube: [@VKFreelancer29](https://www.youtube.com/@VKFreelancer29)
+- 🤝 KV Agency (Instagram): [kvagency.dev](https://www.instagram.com/kvagency.dev/)
+- 🤝 Ayik Solution: [ayiksolution.vercel.app](https://ayiksolution.vercel.app/)
 
 ## 📝 License
 
@@ -128,8 +172,12 @@ This project is open source. Feel free to use it as a template for your own port
 
 ## 📧 Contact
 
-Visit the portfolio at **[vishandeveloper.me](https://vishandeveloper.me)** for the contact form or to reach out directly.
+Visit **[vishandeveloper.me](https://vishandeveloper.me)** for the contact form, or reach out directly at **rabarivishan2@gmail.com**.
 
 ---
 
+<div align="center">
+
 **Built with ❤️ by Vishan Rabari**
+
+</div>

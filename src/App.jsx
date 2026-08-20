@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import ThunderLoader    from "./components/ThunderLoader";
 
 import Navbar           from "./components/Navbar";
 import Hero             from "./components/Hero";
 import About            from "./components/About";
-import Services         from "./components/Services";
-import ProjectImageTabs from "./components/ProjectImageTabs";
-import Skills           from "./components/Skills";
-import Journey          from "./components/Journey";
-import CTABanner        from "./components/CTABanner";
-import Contact          from "./components/Contact";
-import Footer           from "./components/Footer";
+
+/* Below-the-fold sections are code-split so the initial bundle only
+   contains what's needed for the first paint (Navbar + Hero + About). */
+const Services         = lazy(() => import("./components/Services"));
+const ProjectImageTabs = lazy(() => import("./components/ProjectImageTabs"));
+const Skills            = lazy(() => import("./components/Skills"));
+const Journey            = lazy(() => import("./components/Journey"));
+const CTABanner          = lazy(() => import("./components/CTABanner"));
+const Contact            = lazy(() => import("./components/Contact"));
+const Footer             = lazy(() => import("./components/Footer"));
 
 /* ── Custom cursor ── */
 const Cursor = () => {
@@ -55,14 +58,18 @@ export default function App() {
       <main>
         <Hero />         <Div />
         <About />        <Div />
-        <Services />     <Div />
-        <ProjectImageTabs /> <Div />
-        <Skills />       <Div />
-        <Journey />      <Div />
-        <CTABanner />    <Div />
-        <Contact />
+        <Suspense fallback={null}>
+          <Services />     <Div />
+          <ProjectImageTabs /> <Div />
+          <Skills />       <Div />
+          <Journey />      <Div />
+          <CTABanner />    <Div />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

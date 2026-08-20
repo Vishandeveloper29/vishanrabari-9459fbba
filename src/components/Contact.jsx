@@ -1,6 +1,6 @@
 import ThunderBg from "./backgrounds/ThunderBg";
 import { useState, useRef, useEffect, memo, useCallback } from "react";
-import { ArrowUpRight, Mail, MapPin, Send, GitBranch, Zap, Radio } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Send, GitBranch, Zap, Radio, Play, Briefcase, Camera } from "lucide-react";
 
 /* ─── Tokens ─────────────────────────────────────────────────────────── */
 const T = {
@@ -19,6 +19,9 @@ const T = {
 const CARDS = [
     { id: "EML", icon: Mail, label: "EMAIL", value: "rabarivishan2@gmail.com", href: "mailto:rabarivishan2@gmail.com", color: T.teal, rgb: "0,255,231", signal: "OPEN CHANNEL" },
     { id: "GIT", icon: GitBranch, label: "GITHUB", value: "Vishandeveloper29", href: "https://github.com/Vishandeveloper29", color: T.purple, rgb: "191,90,242", signal: "REPO LINK" },
+    { id: "LI", icon: Briefcase, label: "LINKEDIN", value: "vishan-rabari", href: "https://www.linkedin.com/in/vishan-rabari-7634ab392", color: "#60a5fa", rgb: "96,165,250", signal: "PROFESSIONAL" },
+    { id: "IG", icon: Camera, label: "INSTAGRAM", value: "@vishandev.js", href: "https://www.instagram.com/vishandev.js", color: "#a78bfa", rgb: "167,139,250", signal: "BEHIND THE SCENES" },
+    { id: "YT", icon: Play, label: "YOUTUBE", value: "@VKFreelancer29", href: "https://www.youtube.com/@VKFreelancer29", color: "#38bdf8", rgb: "56,189,248", signal: "WATCH BUILDS" },
     { id: "LOC", icon: MapPin, label: "LOCATION", value: "Gandhidham, India", href: "#contact", color: T.orange, rgb: "255,107,53", signal: "REMOTE READY" },
 ];
 

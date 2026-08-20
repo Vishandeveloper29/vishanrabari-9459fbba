@@ -8,6 +8,7 @@ import {
 const frontendSkills = [
   { name: "React / Vite", type: "UI Library",  icon: Code2,           color: "#0ea5e9", rgb: "14,165,233" },
   { name: "Tailwind CSS", type: "Styling",      icon: MonitorSmartphone, color: "#60a5fa", rgb: "96,165,250" },
+  { name: "Bootstrap",    type: "Styling",      icon: MonitorSmartphone, color: "#818cf8", rgb: "129,140,248" },
   { name: "JavaScript",   type: "Language",     icon: Zap,             color: "#facc15", rgb: "250,204,21" },
   { name: "Responsive UI",type: "Frontend",     icon: Globe,           color: "#38bdf8", rgb: "56,189,248" },
 ];
@@ -20,6 +21,7 @@ const threeDWebSkills = [
 const programmingSkills = [
   { name: "JavaScript", type: "Language",    icon: Zap,      color: "#facc15", rgb: "250,204,21" },
   { name: "Python",     type: "Language",    icon: Terminal, color: "#60a5fa", rgb: "96,165,250" },
+  { name: "SQL",        type: "Database",    icon: Terminal, color: "#22d3ee", rgb: "34,211,238" },
   { name: "C Language", type: "Programming", icon: Code2,    color: "#22c55e", rgb: "34,197,94" },
   { name: "REST APIs",  type: "Integration", icon: Globe,    color: "#c084fc", rgb: "192,132,252" },
 ];

@@ -4,24 +4,53 @@ import {
   ArrowUpRight,
   BadgeCheck,
   Car,
-  CheckSquare,
   ChevronLeft,
   ChevronRight,
   Code2,
   Globe,
-  Search,
-  ShoppingCart,
   Sparkles,
+  Zap,
 } from "lucide-react";
 
-import bmwProject from "../assets/projects/bmw.png";
-import githubExplorer from "../assets/projects/githubexplorer.png";
-import lkMart from "../assets/projects/lkmart.png";
-import todoProject from "../assets/projects/todo.png";
-import trueBuild from "../assets/projects/truebuild.png";
-import gauSala from "../assets/projects/gausala.png";
+import bmwProject from "../assets/projects/bmw.webp";
+import trueBuild from "../assets/projects/truebuild.webp";
+import gauSala from "../assets/projects/gausala.webp";
+import dmloop from "../assets/projects/dmloop.webp";
+import eventcure from "../assets/projects/eventcure.webp";
 
+/* Thunder theme: every accent stays inside the blue/cyan family so the
+   section reads as one cohesive dark theme instead of a rainbow. */
 const projects = [
+  {
+    id: "dmloop",
+    title: "DMLoop",
+    fullTitle: "DMLoop — Instagram Automation",
+    category: "SaaS Product",
+    image: dmloop,
+    icon: Zap,
+    badge: "SaaS · KV Agency",
+    previewUrl: "dmloop.app",
+    description: "An Instagram automation SaaS that auto-replies to comments, story replies and DMs, turning conversations into conversions. Built with KV Agency.",
+    live: "https://www.dmloop.app/",
+    github: "https://github.com/Vishandeveloper29",
+    accent: "#22d3ee",
+    accentRgb: "34,211,238",
+  },
+  {
+    id: "eventcure",
+    title: "EventCure",
+    fullTitle: "EventCure — Event Operations Platform",
+    category: "SaaS Product",
+    image: eventcure,
+    icon: Globe,
+    badge: "SaaS · KV Agency",
+    previewUrl: "eventcure-livid.vercel.app",
+    description: "A live operations workspace for guest arrivals, rooms, transport and service requests — built to run large events without chaos. Built with KV Agency.",
+    live: "https://eventcure-livid.vercel.app/",
+    github: "https://github.com/Vishandeveloper29",
+    accent: "#38bdf8",
+    accentRgb: "56,189,248",
+  },
   {
     id: "truebuild",
     title: "TrueBuild",
@@ -34,23 +63,8 @@ const projects = [
     description: "A premium business website for decking and turf products.",
     live: "https://truebuilddeck.vercel.app/",
     github: "https://github.com/Vishandeveloper29/Apex-web",
-    accent: "#a855f7",
-    accentRgb: "168,85,247",
-  },
-  {
-    id: "lk-mart",
-    title: "LK Mart",
-    fullTitle: "LK Mart E-Commerce UI",
-    category: "E-Commerce",
-    image: lkMart,
-    icon: ShoppingCart,
-    badge: "Storefront",
-    previewUrl: "lkmart.onrender.com",
-    description: "A clean grocery e-commerce frontend with responsive layout.",
-    live: "https://lkmart.onrender.com/",
-    github: "https://github.com/Vishandeveloper29/L-K-mart",
-    accent: "#06b6d4",
-    accentRgb: "6,182,212",
+    accent: "#0ea5e9",
+    accentRgb: "14,165,233",
   },
   {
     id: "gau-sala",
@@ -64,8 +78,8 @@ const projects = [
     description: "A trust-based Gau Seva website with clean information flow.",
     live: "https://kamdhenugauseva.vercel.app/",
     github: "https://github.com/Vishandeveloper29/Gau-Sala",
-    accent: "#22c55e",
-    accentRgb: "34,197,94",
+    accent: "#60a5fa",
+    accentRgb: "96,165,250",
   },
   {
     id: "bmw-3d",
@@ -79,38 +93,8 @@ const projects = [
     description: "A dark BMW 3D model viewer with premium automotive styling.",
     live: "https://bmw3dmodelviewer.vercel.app/",
     github: "https://github.com/Vishandeveloper29/BMW-3D-Model-Viewer",
-    accent: "#f59e0b",
-    accentRgb: "245,158,11",
-  },
-  {
-    id: "github-explorer",
-    title: "GitHub",
-    fullTitle: "GitHub Profile Explorer",
-    category: "Frontend + API",
-    image: githubExplorer,
-    icon: Search,
-    badge: "API Project",
-    previewUrl: "github.io/GitHub-Explorer",
-    description: "A GitHub profile search app that fetches live profile data.",
-    live: "https://vishandeveloper29.github.io/GitHub-Explorer/",
-    github: "https://github.com/Vishandeveloper29/GitHub-Explorer",
-    accent: "#e879f9",
-    accentRgb: "232,121,249",
-  },
-  {
-    id: "todo-app",
-    title: "Todo App",
-    fullTitle: "React Todo App",
-    category: "Mini App",
-    image: todoProject,
-    icon: CheckSquare,
-    badge: "State App",
-    previewUrl: "github.io/To-Do-List",
-    description: "A clean productivity app built to practice React state management.",
-    live: "https://vishandeveloper29.github.io/To-Do-List/",
-    github: "https://github.com/Vishandeveloper29/To-Do-List",
-    accent: "#f43f5e",
-    accentRgb: "244,63,94",
+    accent: "#818cf8",
+    accentRgb: "129,140,248",
   },
 ];
 
@@ -227,6 +211,8 @@ const ProjectImageTabs = () => {
                 key={current.id}
                 src={current.image}
                 alt={current.fullTitle}
+                loading="lazy"
+                decoding="async"
                 className="w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]" style={{height:"clamp(220px,40vw,620px)"}}
               />
 

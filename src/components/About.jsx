@@ -258,21 +258,37 @@ const ProfileCard = () => {
             <span style={{ fontFamily: T.mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>Open to Work</span>
           </div>
 
-          <a href="https://ayiksolution.vercel.app/" target="_blank" rel="noreferrer" style={{
-            position: "absolute", top: 18, right: 18, zIndex: 20, textDecoration: "none",
-            display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 999,
-            border: "1px solid rgba(120,80,255,0.3)", background: "rgba(80,40,200,0.15)",
-            backdropFilter: "blur(20px)", transition: `all 0.3s ${T.ease}`,
-          }}>
-            <Zap size={11} style={{ color: "#a78bfa" }} />
-            <span style={{ fontFamily: T.mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#a78bfa" }}>Ayik</span>
-          </a>
+          <div style={{ position: "absolute", top: 18, right: 18, zIndex: 20, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 7 }}>
+            <a href="https://ayiksolution.vercel.app/" target="_blank" rel="noreferrer" style={{
+              textDecoration: "none",
+              display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 999,
+              border: "1px solid rgba(120,80,255,0.3)", background: "rgba(80,40,200,0.15)",
+              backdropFilter: "blur(20px)", transition: `all 0.3s ${T.ease}`,
+            }}>
+              <Zap size={11} style={{ color: "#a78bfa" }} />
+              <span style={{ fontFamily: T.mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#a78bfa" }}>Ayik</span>
+            </a>
+
+            <a href="https://www.instagram.com/kvagency.dev/" target="_blank" rel="noreferrer" style={{
+              textDecoration: "none",
+              display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 999,
+              border: "1px solid rgba(34,211,238,0.3)", background: "rgba(8,60,80,0.2)",
+              backdropFilter: "blur(20px)", transition: `all 0.3s ${T.ease}`,
+            }}>
+              <Sparkles size={11} style={{ color: "#22d3ee" }} />
+              <span style={{ fontFamily: T.mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#22d3ee" }}>KV Agency</span>
+            </a>
+          </div>
 
           {/* Image */}
           <div style={{ position: "relative", height: "clamp(240px,45vw,390px)", overflow: "hidden" }}>
             <img
-              src="/profile.png"
-              alt="Vishan Rabari"
+              src="/profile.webp"
+              alt="Vishan Rabari - Frontend Developer"
+              width="800"
+              height="800"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: "100%", height: "100%", objectFit: "cover",
                 filter: hov ? "grayscale(0%) brightness(1.05)" : "grayscale(20%) brightness(0.9)",
