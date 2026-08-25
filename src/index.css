@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Outfit", "Space Grotesk", system-ui, sans-serif;
+  background: #02030a;
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  overflow-x: hidden;
+  isolation: isolate;
+}
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 3px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#22d3ee, #6366f1);
+  border-radius: 4px;
+}
+::selection {
+  background: rgba(34, 211, 238, 0.22);
+  color: #fff;
+}
+
+/* ── Custom cursor — real pointer devices only ── */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+  .tc-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(34, 211, 238, 0.55);
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    will-change: left, top;
+  }
+  .tc-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #22d3ee;
+    box-shadow:
+      0 0 6px #22d3ee,
+      0 0 12px rgba(34, 211, 238, 0.6);
+    transform: translate(-50%, -50%);
+    will-change: left, top;
+  }
+}
+@media not all and (hover: hover) {
+  .tc-ring,
+  .tc-dot {
+    display: none !important;
+  }
+}
+
+/* ── Animated gradient border ── */
+@property --ba {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+@keyframes bs {
+  to {
+    --ba: 360deg;
+  }
+}
+.grad-border {
+  --ba: 0deg;
+  background:
+    linear-gradient(#05070d, #05070d) padding-box,
+    conic-gradient(
+        from var(--ba),
+        transparent,
+        rgba(34, 211, 238, 0.8),
+        rgba(96, 165, 250, 0.55),
+        rgba(34, 211, 238, 0.8),
+        transparent
+      )
+      border-box;
+  border: 1.5px solid transparent;
+  animation: bs 3s linear infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes pulse-ring {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.6);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ep {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(34, 211, 238, 0.35),
+      0 0 20px rgba(34, 211, 238, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 18px rgba(34, 211, 238, 0.7),
+      0 0 42px rgba(34, 211, 238, 0.28);
+  }
+}
+
+/* ── Canvas perf ── */
+canvas {
+  contain: strict;
+  will-change: auto;
+}
+
+/* ── Backdrop blur — vendor prefix ── */
+[class*="backdrop-blur"] {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur, blur(16px));
+}
+
+/* ── Mobile overrides ── */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  canvas {
+    display: none;
+  }
+}
