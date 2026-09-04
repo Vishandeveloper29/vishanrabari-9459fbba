@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from "react";
 import ThunderBg from "./backgrounds/ThunderBg";
 import {
-  BriefcaseBusiness, Code2, Layers3, MoveUpRight,
-  Sparkles, Zap, ArrowRight, Globe, Star, Terminal,
+  BriefcaseBusiness, Code2, Layers3,
+  MoveUpRight, Sparkles, Zap, ArrowRight,
 } from "lucide-react";
 import { BtnPrimary, BtnMagnetic } from "./ui/PortfolioButtons";
 
@@ -18,11 +18,7 @@ const T = {
 };
 
 /* ════════════════════════════════════════════════════════════════════════
-   REACT-BITS SILK BACKGROUND
-   Iridescent silk flow-field — animated vector field + curl noise
-   ════════════════════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════════════════════
-   STATS DATA
+   STATIC DATA
    ════════════════════════════════════════════════════════════════════════ */
 const STATS = [
   { value: "2+",  label: "Years",    sub: "Experience" },
@@ -47,9 +43,15 @@ const TICKER_ITEMS = [
 ];
 
 const SERVICES = [
-  { icon: Code2,            title: "Frontend Dev",  desc: "React · Tailwind · Vite · Responsive",    c: "0,212,255"   },
-  { icon: Layers3,          title: "UI Craft",      desc: "Glass · Motion · Hover · Premium UX",     c: "167,139,250" },
-  { icon: BriefcaseBusiness,title: "Management",   desc: "Client work · Projects · Delivery",        c: "56,189,248"  },
+  { icon: Code2,             title: "Frontend Dev", desc: "React · Tailwind · Vite · Responsive", c: "0,212,255"   },
+  { icon: Layers3,           title: "UI Craft",     desc: "Glass · Motion · Hover · Premium UX",  c: "167,139,250" },
+  { icon: BriefcaseBusiness, title: "Management",   desc: "Client work · Projects · Delivery",     c: "56,189,248"  },
+];
+
+const TABS_META = [
+  { id: "story",  label: "My Story"   },
+  { id: "skills", label: "Skills"     },
+  { id: "work",   label: "Experience" },
 ];
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -79,6 +81,7 @@ const TickerRow = memo(({ items, reverse = false, speed = 38 }) => {
     </div>
   );
 });
+TickerRow.displayName = "TickerRow";
 
 /* ════════════════════════════════════════════════════════════════════════
    COUNT-UP HOOK
@@ -88,6 +91,8 @@ const useCountUp = (target) => {
   const ref = useRef(null);
   const done = useRef(false);
   useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
     const obs = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting || done.current) return;
       done.current = true;
@@ -102,7 +107,7 @@ const useCountUp = (target) => {
       };
       requestAnimationFrame(tick);
     }, { threshold: 0.5 });
-    if (ref.current) obs.observe(ref.current);
+    obs.observe(node);
     return () => obs.disconnect();
   }, [target]);
   return [count, ref];
@@ -111,7 +116,7 @@ const useCountUp = (target) => {
 /* ════════════════════════════════════════════════════════════════════════
    STAT CARD
    ════════════════════════════════════════════════════════════════════════ */
-const StatCard = ({ s, index }) => {
+const StatCard = memo(({ s }) => {
   const [val, ref] = useCountUp(s.value);
   const [hov, setHov] = useState(false);
   return (
@@ -127,7 +132,6 @@ const StatCard = ({ s, index }) => {
         backdropFilter: "blur(24px)",
         transform: hov ? "translateY(-6px)" : "translateY(0)",
         transition: `all 0.4s ${T.ease}`,
-        animationDelay: `${index * 0.1}s`,
         textAlign: "center",
       }}
     >
@@ -151,13 +155,14 @@ const StatCard = ({ s, index }) => {
       </div>
     </div>
   );
-};
+});
+StatCard.displayName = "StatCard";
 
 /* ════════════════════════════════════════════════════════════════════════
    SKILL BAR
    ════════════════════════════════════════════════════════════════════════ */
-const SkillBar = ({ sk, index, animate }) => (
-  <div style={{ animationDelay: `${index * 0.08}s` }}>
+const SkillBar = memo(({ sk, index, animate }) => (
+  <div>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
       <span style={{ fontFamily: T.mono, fontSize: 10.5, fontWeight: 700, letterSpacing: "0.12em", color: "rgba(255,255,255,0.7)" }}>
         {sk.name}
@@ -176,7 +181,54 @@ const SkillBar = ({ sk, index, animate }) => (
       }} />
     </div>
   </div>
-);
+));
+SkillBar.displayName = "SkillBar";
+
+/* ════════════════════════════════════════════════════════════════════════
+   SERVICE CARD — hoisted out of the render loop (was breaking Rules of Hooks)
+   ════════════════════════════════════════════════════════════════════════ */
+const ServiceCard = memo(({ svc }) => {
+  const [hov, setHov] = useState(false);
+  const Icon = svc.icon;
+  return (
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        position: "relative", overflow: "hidden",
+        padding: "20px 18px", borderRadius: 22,
+        border: hov ? `1px solid rgba(${svc.c},0.4)` : "1px solid rgba(255,255,255,0.07)",
+        background: hov ? `rgba(${svc.c},0.07)` : "rgba(255,255,255,0.025)",
+        backdropFilter: "blur(20px)",
+        transform: hov ? "translateY(-5px)" : "translateY(0)",
+        transition: `all 0.4s ${T.ease}`,
+      }}
+    >
+      <div style={{
+        position: "absolute", top: -30, right: -30, width: 100, height: 100, borderRadius: "50%",
+        background: `rgba(${svc.c},0.1)`, filter: "blur(30px)", pointerEvents: "none",
+        opacity: hov ? 1 : 0.3, transition: "opacity 0.4s ease",
+      }} />
+      <div style={{
+        width: 40, height: 40, borderRadius: 12, marginBottom: 14,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        border: `1px solid rgba(${svc.c},0.28)`,
+        background: `rgba(${svc.c},0.08)`,
+        transform: hov ? "scale(1.12) rotate(-4deg)" : "scale(1)",
+        transition: `transform 0.4s ${T.ease}`,
+      }}>
+        <Icon size={18} style={{ color: `rgba(${svc.c},1)` }} />
+      </div>
+      <h3 style={{ fontFamily: T.heading, fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 6px" }}>
+        {svc.title}
+      </h3>
+      <p style={{ fontFamily: T.mono, fontSize: 9.5, lineHeight: 1.7, color: "rgba(255,255,255,0.38)", margin: 0, letterSpacing: "0.06em" }}>
+        {svc.desc}
+      </p>
+    </div>
+  );
+});
+ServiceCard.displayName = "ServiceCard";
 
 /* ════════════════════════════════════════════════════════════════════════
    PROFILE CARD — 3D tilt
@@ -300,7 +352,7 @@ const ProfileCard = () => {
 
             {/* Floating skill chips on the image */}
             <div style={{ position: "absolute", bottom: 20, left: 18, right: 18, display: "flex", gap: 7, flexWrap: "wrap" }}>
-              {["React", "Tailwind", "UI/UX"].map((s, i) => (
+              {["React", "Tailwind", "UI/UX"].map((s) => (
                 <span key={s} style={{
                   padding: "4px 10px", borderRadius: 999, backdropFilter: "blur(16px)",
                   border: "1px solid rgba(120,80,255,0.35)",
@@ -377,14 +429,26 @@ const ProfileCard = () => {
    MAIN ABOUT SECTION
    ════════════════════════════════════════════════════════════════════════ */
 export default function About() {
-  const [activeTab, setActiveTab]   = useState("story");
-  const [skillAnim, setSkillAnim]   = useState(false);
+  const [activeTab, setActiveTab] = useState("story");
+  const [skillAnim, setSkillAnim] = useState(false);
   const skillRef = useRef(null);
 
   useEffect(() => {
+    const node = skillRef.current;
+    if (!node) return;
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setSkillAnim(true); }, { threshold: 0.2 });
-    if (skillRef.current) obs.observe(skillRef.current);
+    obs.observe(node);
     return () => obs.disconnect();
+  }, []);
+
+  // Left/right arrow keys move focus + selection between tabs, matching native tab widget behavior
+  const onTabKeyDown = useCallback((e, idx) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const dir = e.key === "ArrowRight" ? 1 : -1;
+    const next = (idx + dir + TABS_META.length) % TABS_META.length;
+    setActiveTab(TABS_META[next].id);
+    document.getElementById(`about-tab-${TABS_META[next].id}`)?.focus();
   }, []);
 
   const TABS = {
@@ -446,33 +510,47 @@ export default function About() {
         @keyframes ab-spin       { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
         @keyframes ab-reveal     { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
         @keyframes ab-pulse-dot  { 0%,100%{box-shadow:0 0 8px rgba(120,80,255,0.6)} 50%{box-shadow:0 0 24px rgba(120,80,255,1)} }
-        @keyframes ab-float      { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        @keyframes ab-line-grow  { from{width:0;opacity:0} to{width:80px;opacity:1} }
+        @keyframes ab-text-shine { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-        #about .ab-enter { animation: ab-reveal 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+        #about .ab-enter { animation: ab-reveal 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+        #about .ab-tab:focus-visible,
+        #about .ab-link:focus-visible,
+        #about a:focus-visible {
+          outline: 2px solid #a78bfa;
+          outline-offset: 3px;
+          border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          #about *, #about *::before, #about *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+          }
+        }
       `}</style>
 
       {/* ── Layer 0: base dark ── */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 100% 60% at 50% 0%, rgba(30,12,80,0.9) 0%, #04031a 55%)" }} />
 
-      {/* ── Layer 1: Silk canvas ── */}
+      {/* ── Layer 1: storm canvas ── */}
       <ThunderBg variant="storm" opacity={0.55} />
 
-      {/* ── Layer 2: Subtle grid ── */}
+      {/* ── Layer 2: subtle grid ── */}
       <div style={{
         position: "absolute", inset: 0, opacity: 0.04, pointerEvents: "none",
         backgroundImage: "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
         backgroundSize: "64px 64px",
       }} />
 
-      {/* ── Layer 3: Vignette ── */}
+      {/* ── Layer 3: vignette ── */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(4,3,26,0.75) 100%)", pointerEvents: "none" }} />
 
       {/* ── CONTENT ── */}
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1280, margin: "0 auto" }}>
 
         {/* ── EYEBROW ── */}
-        <div style={{ textAlign: "center", marginBottom: "clamp(40px,6vw,70px)" }}>
+        <div style={{ textAlign: "center", marginBottom: "clamp(40px,6vw,70px)" }} className="ab-enter">
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 24,
             padding: "8px 20px", borderRadius: 999,
@@ -486,7 +564,7 @@ export default function About() {
             </span>
           </div>
 
-          {/* Massive headline */}
+          {/* Headline */}
           <div style={{ position: "relative", display: "inline-block" }}>
             <h2 style={{
               fontFamily: T.display,
@@ -504,7 +582,8 @@ export default function About() {
                 backgroundSize: "200% 200%",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-                animation: "ab-ticker-fwd 6s ease infinite",
+                display: "inline-block",
+                animation: "ab-text-shine 6s ease infinite",
               }}>
                 PREMIUM
               </span>
@@ -514,8 +593,8 @@ export default function About() {
               </span>
             </h2>
 
-            {/* Glitch layer */}
-            <h2 aria-hidden style={{
+            {/* Decorative glitch layer */}
+            <h2 aria-hidden="true" style={{
               position: "absolute", inset: 0,
               fontFamily: T.display,
               fontSize: "clamp(4.5rem, 12vw, 11rem)",
@@ -541,7 +620,7 @@ export default function About() {
 
         {/* ── STAT STRIP ── */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "clamp(8px,1.5vw,12px)", marginBottom: "clamp(36px,5vw,64px)" }} className="about-stat-strip">
-          {STATS.map((s, i) => <StatCard key={s.label} s={s} index={i} />)}
+          {STATS.map((s) => <StatCard key={s.label} s={s} />)}
         </div>
 
         {/* ── MAIN 2-COL ── */}
@@ -555,7 +634,6 @@ export default function About() {
             }
             @media (max-width: 480px) {
               .about-stat-strip { grid-template-columns: repeat(2,1fr) !important; }
-              .about-stat-grid  { grid-template-columns: repeat(2,1fr) !important; }
               .about-svc-grid   { grid-template-columns: 1fr !important; }
             }
             @media (min-width: 481px) and (max-width: 767px) {
@@ -575,15 +653,18 @@ export default function About() {
               backdropFilter: "blur(32px)",
             }}>
               {/* Tab bar */}
-              <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                {[
-                  { id: "story",  label: "My Story"   },
-                  { id: "skills", label: "Skills"      },
-                  { id: "work",   label: "Experience"  },
-                ].map((tab) => (
+              <div role="tablist" aria-label="About Vishan Rabari" style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                {TABS_META.map((tab, idx) => (
                   <button
                     key={tab.id}
+                    id={`about-tab-${tab.id}`}
+                    role="tab"
+                    aria-selected={activeTab === tab.id}
+                    aria-controls={`about-panel-${tab.id}`}
+                    tabIndex={activeTab === tab.id ? 0 : -1}
+                    className="ab-tab"
                     onClick={() => setActiveTab(tab.id)}
+                    onKeyDown={(e) => onTabKeyDown(e, idx)}
                     style={{
                       flex: 1, padding: "16px 8px", border: "none", cursor: "pointer",
                       background: "none",
@@ -598,52 +679,14 @@ export default function About() {
                   </button>
                 ))}
               </div>
-              <div style={{ padding: "24px 26px" }}>{TABS[activeTab]}</div>
+              <div id={`about-panel-${activeTab}`} role="tabpanel" aria-labelledby={`about-tab-${activeTab}`} style={{ padding: "24px 26px" }}>
+                {TABS[activeTab]}
+              </div>
             </div>
 
             {/* SERVICE CARDS */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }} className="about-svc-grid">
-              {SERVICES.map((svc) => {
-                const [hov, setHov] = useState(false);
-                return (
-                  <div
-                    key={svc.title}
-                    onMouseEnter={() => setHov(true)}
-                    onMouseLeave={() => setHov(false)}
-                    style={{
-                      position: "relative", overflow: "hidden",
-                      padding: "20px 18px", borderRadius: 22,
-                      border: hov ? `1px solid rgba(${svc.c},0.4)` : "1px solid rgba(255,255,255,0.07)",
-                      background: hov ? `rgba(${svc.c},0.07)` : "rgba(255,255,255,0.025)",
-                      backdropFilter: "blur(20px)",
-                      transform: hov ? "translateY(-5px)" : "translateY(0)",
-                      transition: `all 0.4s ${T.ease}`,
-                    }}
-                  >
-                    <div style={{
-                      position: "absolute", top: -30, right: -30, width: 100, height: 100, borderRadius: "50%",
-                      background: `rgba(${svc.c},0.1)`, filter: "blur(30px)", pointerEvents: "none",
-                      opacity: hov ? 1 : 0.3, transition: "opacity 0.4s ease",
-                    }} />
-                    <div style={{
-                      width: 40, height: 40, borderRadius: 12, marginBottom: 14,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      border: `1px solid rgba(${svc.c},0.28)`,
-                      background: `rgba(${svc.c},0.08)`,
-                      transform: hov ? "scale(1.12) rotate(-4deg)" : "scale(1)",
-                      transition: `transform 0.4s ${T.ease}`,
-                    }}>
-                      <svc.icon size={18} style={{ color: `rgba(${svc.c},1)` }} />
-                    </div>
-                    <h3 style={{ fontFamily: T.heading, fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 6px" }}>
-                      {svc.title}
-                    </h3>
-                    <p style={{ fontFamily: T.mono, fontSize: 9.5, lineHeight: 1.7, color: "rgba(255,255,255,0.38)", margin: 0, letterSpacing: "0.06em" }}>
-                      {svc.desc}
-                    </p>
-                  </div>
-                );
-              })}
+              {SERVICES.map((svc) => <ServiceCard key={svc.title} svc={svc} />)}
             </div>
 
             {/* CTA */}
@@ -659,7 +702,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* ── RIGHT: Profile card ── */}
+          {/* ── RIGHT: profile card ── */}
           <div style={{ margin: "0 auto", width: "100%", maxWidth: 420 }}>
             <ProfileCard />
           </div>
