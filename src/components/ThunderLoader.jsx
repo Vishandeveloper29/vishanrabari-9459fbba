@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
 /* ─────────────────────────────────────────────────────────
-   ThunderLoader — Storm + Glass-Shatter Finale (World Class)
+   ThunderLoader — Heavy Storm + Glass-Shatter Finale (v2)
 
    Usage in App.jsx / main entry:
    const [loaded, setLoaded] = useState(false);
@@ -21,25 +21,6 @@ export default function ThunderLoader({ onDone }) {
   const [shakeKey, setShakeKey] = useState(0);
 
   const rand = (a, b) => a + Math.random() * (b - a);
-
-  /* ── split geometry: single center split (2 halves) ── */
-  const shardCols = 2, shardRows = 1;
-  const shards = useMemo(() => {
-    return [
-      { r: 0, c: 0, tx: -108, ty: 0, rot: 6,  rot3d: 16,  delay: 0,  scale: 0.96 },
-      { r: 0, c: 1, tx: 108,  ty: 0, rot: -6, rot3d: -16, delay: 40, scale: 0.96 },
-    ];
-  }, []);
-
-  const generateJagged = useCallback((len, spread) => {
-    let pts = [];
-    let y = 0;
-    while (y < len) {
-      pts.push([rand(-spread, spread), y]);
-      y += rand(16, 34);
-    }
-    return pts.map(p => p.join(",")).join(" ");
-  }, []);
 
   /* ── realistic fractal lightning channel (midpoint displacement) ── */
   const fractalPath = useCallback((x1, y1, x2, y2, disp, depth = 0) => {
@@ -71,18 +52,18 @@ export default function ThunderLoader({ onDone }) {
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
 
-    const endX = cx + rand(-22, 22) * scale;
-    const disp = Math.max(18, W * 0.05) * scale;
+    const endX = cx + rand(-30, 30) * scale;
+    const disp = Math.max(20, W * 0.06) * scale;
     const main = fractalPath(cx, topY, endX, H, disp);
 
     // organic forks spawned off real points along the channel
     const forks = [];
     for (let i = 2; i < main.length - 3; i++) {
-      if (Math.random() < 0.16) {
+      if (Math.random() < 0.2) {
         const [bx, by] = main[i];
         const remaining = 1 - i / main.length;
         const dir = Math.random() < 0.5 ? 1 : -1;
-        const flen = rand(40, 130) * scale * (0.4 + remaining);
+        const flen = rand(45, 150) * scale * (0.4 + remaining);
         const tx = bx + dir * rand(0.5, 1) * flen;
         const ty = by + flen * rand(0.6, 1);
         forks.push(fractalPath(bx, by, tx, ty, disp * 0.4 * remaining + 4));
@@ -92,24 +73,23 @@ export default function ThunderLoader({ onDone }) {
     const colors = ["#8b7cff", "#38bdf8", "#ffffff"];
     for (let pass = 0; pass < 3; pass++) {
       const isCore = pass === 2;
-      const baseAlpha = alpha * (isCore ? 1 : pass === 1 ? 0.38 : 0.16);
-      const wStart = (isCore ? 2.1 : pass === 1 ? 6 : 15) * scale;
-      const wEnd   = (isCore ? 0.5 : pass === 1 ? 1.6 : 4) * scale;
-      ctx.shadowBlur  = isCore ? 24 : pass === 1 ? 46 : 0;
+      const baseAlpha = alpha * (isCore ? 1 : pass === 1 ? 0.42 : 0.18);
+      const wStart = (isCore ? 2.3 : pass === 1 ? 6.6 : 17) * scale;
+      const wEnd   = (isCore ? 0.5 : pass === 1 ? 1.7 : 4.4) * scale;
+      ctx.shadowBlur  = isCore ? 26 : pass === 1 ? 50 : 0;
       ctx.shadowColor = isCore ? "#e9e4ff" : "#7c5cff";
       ctx.strokeStyle = colors[pass];
       strokeTapered(ctx, main, wStart, wEnd, baseAlpha);
 
       if (pass === 1) {
         for (const f of forks) {
-          const fa = rand(0.2, 0.36);
-          strokeTapered(ctx, f, rand(1.4, 2.4) * scale, 0.3 * scale, fa);
+          const fa = rand(0.22, 0.4);
+          strokeTapered(ctx, f, rand(1.5, 2.6) * scale, 0.3 * scale, fa);
         }
       }
       if (isCore) {
-        // hairline white core over forks so they read as branching off the same strike
         ctx.shadowBlur = 6;
-        for (const f of forks) strokeTapered(ctx, f, 1 * scale, 0.2 * scale, alpha * 0.45);
+        for (const f of forks) strokeTapered(ctx, f, 1 * scale, 0.2 * scale, alpha * 0.48);
       }
     }
     ctx.restore();
@@ -118,12 +98,11 @@ export default function ThunderLoader({ onDone }) {
   /* strike with a quick real-world flicker: bright leader stroke,
      near-instant dim, then a slightly offset brighter return stroke */
   const strikeBolt = useCallback((ctx, cx, topY, W, H, alpha, scale, onFrame) => {
-    const W2 = W, H2 = H;
-    ctx.clearRect(0, 0, W2, H2);
+    ctx.clearRect(0, 0, W, H);
     drawBolt(ctx, cx, topY, W, H, alpha * 0.55, scale * 0.96);
     onFrame?.(alpha * 0.5);
     setTimeout(() => {
-      ctx.clearRect(0, 0, W2, H2);
+      ctx.clearRect(0, 0, W, H);
       drawBolt(ctx, cx, topY, W, H, alpha, scale);
       onFrame?.(alpha);
     }, rand(18, 34));
@@ -145,17 +124,27 @@ export default function ThunderLoader({ onDone }) {
 
   const shake = useCallback(() => setShakeKey(k => k + 1), []);
 
-  /* ── ambient background strikes during loading ── */
+  /* ── ambient background strikes during loading (frequent, heavy) ── */
   const ambientStrike = useCallback(() => {
     if (doneRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const W = canvas.width, H = canvas.height;
-    const cx = rand(W * 0.1, W * 0.9);
-    const scale = rand(0.4, 0.8);
-    strikeBolt(ctx, cx, 0, W, H * rand(0.5, 0.9), rand(0.38, 0.65), scale, (a) => flashScreen(a * 0.35, 60));
-    setTimeout(() => ctx.clearRect(0, 0, W, H), 130);
+    const cx = rand(W * 0.08, W * 0.92);
+    const scale = rand(0.42, 0.85);
+    strikeBolt(ctx, cx, 0, W, H * rand(0.5, 0.92), rand(0.4, 0.7), scale, (a) => flashScreen(a * 0.38, 70));
+    setTimeout(() => ctx.clearRect(0, 0, W, H), 140);
+
+    // occasional second, dimmer bolt for a "double strike" heavy-storm feel
+    if (Math.random() < 0.3) {
+      setTimeout(() => {
+        if (doneRef.current) return;
+        const cx2 = rand(W * 0.08, W * 0.92);
+        strikeBolt(ctx, cx2, 0, W, H * rand(0.4, 0.8), rand(0.25, 0.45), scale * 0.8, (a) => flashScreen(a * 0.25, 60));
+        setTimeout(() => ctx.clearRect(0, 0, W, H), 130);
+      }, rand(90, 220));
+    }
   }, [strikeBolt, flashScreen]);
 
   /* ── finale: escalating strikes on the center seam, then shatter ── */
@@ -166,36 +155,36 @@ export default function ThunderLoader({ onDone }) {
     const W = canvas.width, H = canvas.height;
     const cx = W / 2;
     let count = 0;
-    const total = 5;
+    const total = 6;
 
     function strike() {
       count++;
       const isLast = count === total;
       strikeBolt(
-        ctx, cx, 0, W, H,
-        isLast ? 1 : 0.75 + count * 0.05,
-        isLast ? 1.8 : 0.85 + count * 0.15,
-        (a) => flashScreen(isLast ? a : 0.3 + count * 0.08, isLast ? 220 : 60, isLast ? "hot" : "cool")
+        ctx, cx + rand(-30, 30), 0, W, H,
+        isLast ? 1 : 0.72 + count * 0.045,
+        isLast ? 2.1 : 0.8 + count * 0.14,
+        (a) => flashScreen(isLast ? a : 0.3 + count * 0.07, isLast ? 240 : 60, isLast ? "hot" : "cool")
       );
       shake();
 
       if (count < total) {
         setTimeout(() => {
           ctx.clearRect(0, 0, W, H);
-          setTimeout(strike, rand(70, 140));
-        }, rand(100, 160));
+          setTimeout(strike, rand(60, 130));
+        }, rand(90, 150));
       } else {
         setTimeout(() => {
           ctx.clearRect(0, 0, W, H);
           onComplete();
-        }, 300);
+        }, 320);
       }
     }
     strike();
   }, [strikeBolt, flashScreen, shake]);
 
   /* ── progress animation ── */
-  const LOAD_TIME = 3400;
+  const LOAD_TIME = 3600;
 
   const tick = useCallback((ts) => {
     if (doneRef.current) return;
@@ -212,7 +201,7 @@ export default function ThunderLoader({ onDone }) {
         doFinale(() => {
           setPhase("shatter");
           doneRef.current = true;
-          setTimeout(() => onDone?.(), 1150);
+          setTimeout(() => onDone?.(), 1250);
         });
       }, 150);
     }
@@ -238,7 +227,7 @@ export default function ThunderLoader({ onDone }) {
       ambientTimer = setTimeout(() => {
         if (!doneRef.current) ambientStrike();
         if (!doneRef.current) scheduleAmbient();
-      }, rand(600, 1350));
+      }, rand(420, 1050));
     };
     scheduleAmbient();
     return () => {
@@ -252,13 +241,14 @@ export default function ThunderLoader({ onDone }) {
   const isShatter = phase === "shatter";
   const isStriking = phase === "striking";
 
-  /* rain streaks (generated once) */
-  const rainDrops = useMemo(() => Array.from({ length: 34 }).map((_, i) => ({
+  /* rain streaks (generated once) — heavier count, wind-driven angle */
+  const rainDrops = useMemo(() => Array.from({ length: 70 }).map((_, i) => ({
     left: rand(0, 100),
     delay: rand(0, 3.5),
-    dur: rand(1.4, 2.6),
-    len: rand(40, 100),
-    opacity: rand(0.05, 0.18),
+    dur: rand(0.9, 1.9),
+    len: rand(50, 130),
+    opacity: rand(0.06, 0.22),
+    thick: rand(1, 1.6),
   })), []);
 
   /* the full loader scene rendered once, tiled into shards below */
@@ -266,37 +256,45 @@ export default function ThunderLoader({ onDone }) {
     <>
       <div className="tl-cloud" style={{
         top: "-15%", left: "-10%", width: "70%", height: "70%",
-        background: "radial-gradient(circle,rgba(88,60,180,.55),rgba(30,20,60,.15) 60%,transparent 75%)",
-        animation: "tl-drift-a 18s ease-in-out infinite",
-      }} />
-      <div className="tl-cloud" style={{
-        top: "-10%", right: "-15%", width: "65%", height: "75%",
-        background: "radial-gradient(circle,rgba(60,90,190,.45),rgba(20,25,60,.12) 60%,transparent 75%)",
-        animation: "tl-drift-b 22s ease-in-out infinite",
-      }} />
-      <div className="tl-cloud" style={{
-        bottom: "-20%", left: "-10%", width: "75%", height: "70%",
-        background: "radial-gradient(circle,rgba(70,50,150,.5),rgba(20,15,45,.1) 60%,transparent 75%)",
-        animation: "tl-drift-b 20s ease-in-out infinite",
-      }} />
-      <div className="tl-cloud" style={{
-        bottom: "-18%", right: "-12%", width: "68%", height: "68%",
-        background: "radial-gradient(circle,rgba(50,80,170,.5),rgba(15,20,50,.1) 60%,transparent 75%)",
+        background: "radial-gradient(circle,rgba(88,60,180,.6),rgba(30,20,60,.16) 60%,transparent 75%)",
         animation: "tl-drift-a 16s ease-in-out infinite",
       }} />
       <div className="tl-cloud" style={{
+        top: "-10%", right: "-15%", width: "65%", height: "75%",
+        background: "radial-gradient(circle,rgba(60,90,190,.5),rgba(20,25,60,.13) 60%,transparent 75%)",
+        animation: "tl-drift-b 19s ease-in-out infinite",
+      }} />
+      <div className="tl-cloud" style={{
+        bottom: "-20%", left: "-10%", width: "75%", height: "70%",
+        background: "radial-gradient(circle,rgba(70,50,150,.55),rgba(20,15,45,.11) 60%,transparent 75%)",
+        animation: "tl-drift-b 18s ease-in-out infinite",
+      }} />
+      <div className="tl-cloud" style={{
+        bottom: "-18%", right: "-12%", width: "68%", height: "68%",
+        background: "radial-gradient(circle,rgba(50,80,170,.55),rgba(15,20,50,.11) 60%,transparent 75%)",
+        animation: "tl-drift-a 14s ease-in-out infinite",
+      }} />
+      <div className="tl-cloud" style={{
         top: "30%", left: "30%", width: "45%", height: "45%",
-        background: "radial-gradient(circle,rgba(90,70,200,.25),transparent 70%)",
-        animation: "tl-drift-c 14s ease-in-out infinite",
+        background: "radial-gradient(circle,rgba(90,70,200,.3),transparent 70%)",
+        animation: "tl-drift-c 12s ease-in-out infinite",
+      }} />
+      {/* low rolling fog band for extra storm weight */}
+      <div style={{
+        position: "absolute", left: "-10%", right: "-10%", bottom: "-6%", height: "38%",
+        background: "linear-gradient(180deg,transparent,rgba(20,16,40,.55) 60%,rgba(6,4,12,.75))",
+        filter: "blur(18px)",
+        animation: "tl-fog 11s ease-in-out infinite",
+        pointerEvents: "none",
       }} />
 
       {/* rain */}
       {rainDrops.map((d, i) => (
         <div key={i} style={{
-          position: "absolute", top: -80, left: `${d.left}%`,
-          width: 1, height: d.len,
+          position: "absolute", top: -100, left: `${d.left}%`,
+          width: d.thick, height: d.len,
           background: `linear-gradient(180deg,transparent,rgba(190,200,255,${d.opacity}),transparent)`,
-          transform: "rotate(8deg)",
+          transform: "rotate(10deg)",
           animation: `tl-rain ${d.dur}s linear ${d.delay}s infinite`,
           pointerEvents: "none",
         }} />
@@ -309,11 +307,11 @@ export default function ThunderLoader({ onDone }) {
       }} />
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(180deg,rgba(5,3,8,.4),transparent 20%,transparent 80%,rgba(5,3,8,.6))",
+        background: "linear-gradient(180deg,rgba(5,3,8,.45),transparent 20%,transparent 78%,rgba(5,3,8,.65))",
         pointerEvents: "none",
       }} />
 
-      {Array.from({ length: 26 }).map((_, i) => {
+      {Array.from({ length: 30 }).map((_, i) => {
         const top = rand(0, 100), left = rand(0, 100), size = rand(1, 2.4), dur = rand(2, 5), delay = rand(0, 4);
         return (
           <div key={i} style={{
@@ -439,9 +437,7 @@ export default function ThunderLoader({ onDone }) {
         overflow: "hidden",
         fontFamily: "'DM Sans', sans-serif",
         perspective: "1600px",
-        animation: isStriking
-          ? `${shakeKey % 2 === 0 ? "tl-shake" : "tl-shake-alt"} .45s cubic-bezier(.36,.07,.19,.97)`
-          : "none",
+        animation: "none",
       }}
     >
       <style>{`
@@ -451,8 +447,9 @@ export default function ThunderLoader({ onDone }) {
         @keyframes tl-drift-a { 0%,100% { transform: translate(-4%,-3%) scale(1.05) rotate(0deg); } 50% { transform: translate(3%,2%) scale(1.15) rotate(2deg); } }
         @keyframes tl-drift-b { 0%,100% { transform: translate(3%,2%) scale(1.1) rotate(0deg); } 50% { transform: translate(-4%,-2%) scale(1.2) rotate(-2deg); } }
         @keyframes tl-drift-c { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-2%,3%) scale(1.08); } }
+        @keyframes tl-fog { 0%,100% { transform: translateX(-2%) scaleY(1); } 50% { transform: translateX(3%) scaleY(1.15); } }
         @keyframes tl-twinkle { 0%,100% { opacity:.15; } 50% { opacity:.8; } }
-        @keyframes tl-rain { 0% { transform: translateY(0) rotate(8deg); } 100% { transform: translateY(140vh) rotate(8deg); } }
+        @keyframes tl-rain { 0% { transform: translateY(0) rotate(10deg); } 100% { transform: translateY(140vh) rotate(10deg); } }
         @keyframes tl-icon-pulse {
           0%,100% { filter: drop-shadow(0 0 10px rgba(167,139,250,.55)) drop-shadow(0 0 22px rgba(56,189,248,.25)); }
           50%     { filter: drop-shadow(0 0 18px rgba(167,139,250,.85)) drop-shadow(0 0 34px rgba(56,189,248,.45)); }
@@ -464,44 +461,40 @@ export default function ThunderLoader({ onDone }) {
         @keyframes tl-behind-in { from { opacity:0; transform:scale(.9) translateY(14px); } to { opacity:1; transform:scale(1) translateY(0); } }
         @keyframes tl-shake {
           0%   { transform: translate(0,0) rotate(0); }
-          10%  { transform: translate(-18px,10px) rotate(-1deg) scale(1.01); }
-          20%  { transform: translate(16px,-14px) rotate(1.1deg); }
-          30%  { transform: translate(-20px,12px) rotate(-.9deg); }
-          40%  { transform: translate(14px,-16px) rotate(1deg); }
-          50%  { transform: translate(-12px,8px) rotate(-.6deg); }
-          60%  { transform: translate(10px,-9px) rotate(.5deg); }
-          70%  { transform: translate(-7px,6px) rotate(-.35deg); }
-          80%  { transform: translate(5px,-4px) rotate(.2deg); }
-          90%  { transform: translate(-3px,2px) rotate(-.1deg); }
+          10%  { transform: translate(-22px,12px) rotate(-1.3deg) scale(1.015); }
+          20%  { transform: translate(20px,-17px) rotate(1.3deg); }
+          30%  { transform: translate(-24px,14px) rotate(-1.1deg); }
+          40%  { transform: translate(17px,-19px) rotate(1.2deg); }
+          50%  { transform: translate(-14px,10px) rotate(-.7deg); }
+          60%  { transform: translate(12px,-11px) rotate(.6deg); }
+          70%  { transform: translate(-9px,7px) rotate(-.4deg); }
+          80%  { transform: translate(6px,-5px) rotate(.25deg); }
+          90%  { transform: translate(-3px,3px) rotate(-.12deg); }
           100% { transform: translate(0,0) rotate(0); }
         }
         @keyframes tl-shake-alt {
           0%   { transform: translate(0,0) rotate(0); }
-          10%  { transform: translate(18px,-10px) rotate(1deg) scale(1.01); }
-          20%  { transform: translate(-16px,14px) rotate(-1.1deg); }
-          30%  { transform: translate(20px,-12px) rotate(.9deg); }
-          40%  { transform: translate(-14px,16px) rotate(-1deg); }
-          50%  { transform: translate(12px,-8px) rotate(.6deg); }
-          60%  { transform: translate(-10px,9px) rotate(-.5deg); }
-          70%  { transform: translate(7px,-6px) rotate(.35deg); }
-          80%  { transform: translate(-5px,4px) rotate(-.2deg); }
-          90%  { transform: translate(3px,-2px) rotate(.1deg); }
+          10%  { transform: translate(22px,-12px) rotate(1.3deg) scale(1.015); }
+          20%  { transform: translate(-20px,17px) rotate(-1.3deg); }
+          30%  { transform: translate(24px,-14px) rotate(1.1deg); }
+          40%  { transform: translate(-17px,19px) rotate(-1.2deg); }
+          50%  { transform: translate(14px,-10px) rotate(.7deg); }
+          60%  { transform: translate(-12px,11px) rotate(-.6deg); }
+          70%  { transform: translate(9px,-7px) rotate(.4deg); }
+          80%  { transform: translate(-6px,5px) rotate(-.25deg); }
+          90%  { transform: translate(3px,-3px) rotate(.12deg); }
           100% { transform: translate(0,0) rotate(0); }
         }
 
         .tl-cloud { position:absolute; border-radius:50%; filter:blur(40px); pointer-events:none; }
 
-        .tl-shard {
+        .tl-scene {
           position: absolute;
-          overflow: hidden;
+          inset: 0;
           will-change: transform, opacity, filter;
-          transition: transform 1.05s cubic-bezier(.65,0,.2,1),
+          transition: transform 1s cubic-bezier(.65,0,.2,1),
                       opacity .8s ease,
                       filter .8s ease;
-          backface-visibility: hidden;
-        }
-        .tl-shard-inner {
-          position: absolute;
         }
       `}</style>
 
@@ -541,37 +534,18 @@ export default function ThunderLoader({ onDone }) {
           }}>Portfolio Ready</div>
         </div>
 
-        {/* ── SHARDS (grid-tiled full scene, shatters apart at 100%) ── */}
-        {shards.map((s, i) => {
-          const w = 100 / shardCols, h = 100 / shardRows;
-          const style = {
-            top: `${s.r * h}%`,
-            left: `${s.c * w}%`,
-            width: `${w}%`,
-            height: `${h}%`,
+        {/* ── SCENE (single layer, fades/scales out at 100%) ── */}
+        <div
+          className="tl-scene"
+          style={{
             zIndex: 20,
-            transitionDelay: isShatter ? `${s.delay}ms` : "0ms",
-            transform: isShatter
-              ? `translate(${s.tx}%,${s.ty}%) rotate(${s.rot}deg) rotateY(${s.rot3d}deg) scale(${s.scale})`
-              : "translate(0,0) rotate(0) rotateY(0) scale(1)",
+            transform: isShatter ? "scale(1.08)" : "scale(1)",
             opacity: isShatter ? 0 : 1,
-            filter: isShatter ? "brightness(1.4)" : "none",
-            border: !isShatter && (isStriking) ? "1px solid rgba(167,139,250,.15)" : "none",
-          };
-          const innerStyle = {
-            top: `${-s.r * 100}%`,
-            left: `${-s.c * 100}%`,
-            width: `${shardCols * 100}%`,
-            height: `${shardRows * 100}%`,
-          };
-          return (
-            <div className="tl-shard" key={i} style={style}>
-              <div className="tl-shard-inner" style={innerStyle}>{Scene}</div>
-            </div>
-          );
-        })}
-
-        {/* seam overlay removed — not needed for a clean 2-way split */}
+            filter: isShatter ? "brightness(1.5)" : "none",
+          }}
+        >
+          {Scene}
+        </div>
 
         {/* ── LIGHTNING CANVAS ── */}
         <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, zIndex: 30, pointerEvents: "none" }} />
