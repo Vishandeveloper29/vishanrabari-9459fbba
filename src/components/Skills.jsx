@@ -338,7 +338,7 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
   const RowIcon = title === "3D Web" ? Sparkles : title === "Programming" ? Terminal : Code2;
 
   return (
-    <div style={{ position: "relative", marginBottom: "clamp(64px,8vw,120px)" }}>
+    <div style={{ position: "relative", marginBottom: "clamp(72px,9vw,132px)" }}>
       {/* SVG accent bar behind row heading */}
       <svg style={{ position: "absolute", top: 0, left: isRight ? "auto" : 0, right: isRight ? 0 : "auto", width: "55%", height: "3px", overflow: "visible" }} xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -355,7 +355,7 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
       </svg>
 
       {/* Row heading */}
-      <div style={{ marginBottom: 40, display: "flex", alignItems: "center", gap: 16, justifyContent: isRight ? "flex-end" : "flex-start" }}>
+      <div style={{ marginBottom: 48, display: "flex", alignItems: "center", gap: 16, justifyContent: isRight ? "flex-end" : "flex-start" }}>
         <div style={{
           width: 42, height: 42, borderRadius: 12, flexShrink: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -379,20 +379,14 @@ const SkillRow = ({ title, accent, index, side = "left", skills, theme = "cyan" 
         }}>{index}</span>
       </div>
 
-      {/* Orb grid */}
-      <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
-        {/* Connector line behind orbs */}
-        <div style={{
-          position: "absolute", top: "83px", left: "11%", right: "11%", height: 1,
-          background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)",
-          display: "none",
-        }} className="skills-connector"/>
-
+      {/* Orb grid — generous gap so hover rings never collide between neighbors */}
+      <div style={{ position: "relative", maxWidth: 960, margin: "0 auto" }}>
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
           placeItems: "center",
-          gap: "clamp(24px,4vw,48px) clamp(16px,3vw,32px)",
+          rowGap: "clamp(48px,7vw,72px)",
+          columnGap: "clamp(32px,5vw,56px)",
         }}>
           {skills.map((skill, i) => (
             <SkillOrb key={skill.name} skill={skill} delay={i * 120}/>
@@ -578,8 +572,10 @@ const Skills = () => (
         color: transparent;
         -webkit-text-stroke: 1px rgba(255,255,255,0.14);
       }
-      @media (min-width: 768px) {
-        .skills-connector { display: block !important; }
+
+      @media (prefers-reduced-motion: reduce) {
+        #skills .skill-fade { animation: none; opacity: 1; }
+        #skills * { animation-duration: 0.01ms !important; }
       }
     `}</style>
 
@@ -627,7 +623,7 @@ const Skills = () => (
     <div style={{ position: "relative", zIndex: 10, maxWidth: 1140, margin: "0 auto" }}>
 
       {/* Heading */}
-      <div style={{ textAlign: "center", marginBottom: "clamp(48px,7vw,96px)" }}>
+      <div style={{ position: "relative", textAlign: "center", marginBottom: "clamp(48px,7vw,96px)" }}>
         {/* Decorative SVG halo behind title */}
         <svg style={{ position: "absolute", left: "50%", transform: "translateX(-50%) translateY(-18px)", width: "min(600px,90vw)", height: 160, pointerEvents: "none", zIndex: 0, overflow: "visible" }} xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="300" cy="80" rx="260" ry="60" stroke="rgba(34,211,238,0.1)" strokeWidth="1" fill="none" strokeDasharray="5 8"/>
@@ -687,7 +683,7 @@ const Skills = () => (
             Tools & Platforms
           </span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 16 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 18 }}>
           {tools.map((tool, i) => <ToolCard key={tool.name} tool={tool} delay={i * 90}/>)}
         </div>
       </div>
