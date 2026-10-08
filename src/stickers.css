@@ -1,0 +1,52 @@
+/* ===== STICKER PACK — die-cut coding stickers (drag me!) ===== */
+.stk-layer{position:absolute;inset:0;z-index:4;pointer-events:none}
+.stk{position:absolute;pointer-events:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+  transform:translate(var(--dx,0px),var(--dy,0px)) rotate(var(--r,0deg))}
+.stk.drag{cursor:grabbing;z-index:9}
+.stk-float{animation:stkFloat 5.5s ease-in-out infinite;animation-delay:var(--d,0s)}
+.stk-spin{transition:transform .3s var(--ease)}
+.stk:hover .stk-spin{transform:scale(1.12) rotate(-4deg)}
+.stk.drag .stk-spin{transform:scale(1.2) rotate(5deg)}
+.stk-spin.spin{animation:stkSpin .85s var(--ease)}
+@keyframes stkFloat{50%{transform:translateY(-9px) rotate(2deg)}}
+@keyframes stkSpin{from{transform:rotate(0) scale(1)}50%{transform:rotate(200deg) scale(1.25)}to{transform:rotate(360deg) scale(1)}}
+.stk svg{display:block;width:var(--w,90px);height:auto;overflow:visible;
+  filter:drop-shadow(0 4px 0 rgb(0 0 0/.13)) drop-shadow(0 14px 14px rgb(0 0 0/.22));transition:filter .3s}
+.stk:hover svg,.stk.drag svg{filter:drop-shadow(0 7px 0 rgb(0 0 0/.12)) drop-shadow(0 24px 22px rgb(0 0 0/.3))}
+
+/* die-cut white border */
+.cut>*{fill:#fff;stroke:#fff;stroke-width:13;stroke-linejoin:round;stroke-linecap:round}
+.cut>.cl{fill:none}
+/* tones */
+.c-v>*{fill:var(--volt)}.c-e>*{fill:var(--ember)}.c-g>*{fill:var(--violet)}.c-k>*{fill:#15130f}.c-p>*{fill:#fbf7ee}
+.c-v>*,.c-e>*,.c-g>*,.c-k>*,.c-p>*{stroke:#15130f;stroke-width:3;stroke-linejoin:round}
+.c-k>*{stroke:#15130f}
+/* line art */
+.ln,.ln-p,.ln-v,.ln-w{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ln{stroke:#15130f;stroke-width:6}
+.ln-p{stroke:#f4efe6;stroke-width:7}
+.ln-v{stroke:var(--volt);stroke-width:4}
+.ln-w{stroke:#fff;stroke-width:13}
+.nd{fill:#15130f;stroke:var(--volt);stroke-width:5}
+.tx{font:800 14px var(--mono);fill:#15130f;letter-spacing:-.01em}
+.tx-p{fill:#f4efe6}.tx-v{fill:var(--volt)}.tx-d{font-size:22px;fill:#15130f}.tx-l{fill:#fff}.tx-s{font-size:11px}
+.blink{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+/* little animations */
+.steam{stroke-width:4;stroke-dasharray:6 8;animation:steam 1.4s linear infinite}
+.steam.s2{animation-delay:-.4s}.steam.s3{animation-delay:-.8s}
+@keyframes steam{to{stroke-dashoffset:-28}}
+.flame{fill:var(--ember);stroke:#15130f;stroke-width:3;stroke-linejoin:round;transform-box:fill-box;transform-origin:top;animation:flame .25s ease-in-out infinite alternate}
+@keyframes flame{to{transform:scaleY(1.25) scaleX(.9)}}
+.ripple{stroke-width:3;stroke-dasharray:4 7;transform-box:fill-box;transform-origin:center;animation:ripple 1.8s ease-out infinite}
+@keyframes ripple{from{transform:scale(.5);opacity:1}to{transform:scale(1.25);opacity:0}}
+
+/* About-photo set lives inside the photo wrapper */
+.stk-about{z-index:5}
+
+/* responsive */
+@media(max-width:1050px){.stk-hero .stk{scale:.82}.stk-hero .stk:nth-child(7),.stk-hero .stk:nth-child(8){display:none}}
+@media(max-width:900px){.stk-about .stk{scale:.78}}
+@media(max-width:700px){.stk-hero .stk{scale:.62}.stk-hero .stk:nth-child(n+5){display:none}.stk-about .stk{scale:.62}.stk-about .stk:nth-child(n+4){display:none}}
+@media(pointer:coarse){.stk{pointer-events:none}}
+@media(prefers-reduced-motion:reduce){.stk-float,.steam,.flame,.ripple,.blink,.stk-spin.spin{animation:none}}

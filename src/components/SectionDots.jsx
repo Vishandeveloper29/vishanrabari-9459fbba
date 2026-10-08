@@ -7,6 +7,7 @@ const sections = [
   ['projects', 'WORK'],
   ['skills', 'SKILLS'],
   ['journey', 'JOURNEY'],
+  ['terminal', 'TERMINAL'],
   ['contact', 'CONTACT'],
 ];
 

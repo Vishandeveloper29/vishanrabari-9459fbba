@@ -1,0 +1,66 @@
+/* ==========================================================
+   THEME v3 — "Warm Editorial"
+   Sits on top of index.css. Delete the import in main.jsx to revert.
+   ========================================================== */
+:root{
+  --black:#15130f; --paper:#f4efe6; --gray:#ddd5c4;
+  --volt:#e4572e;            /* vermilion  (was lime)   */
+  --violet:#4cc790;          /* sage green (was violet) */
+  --ember:#f2a03d;           /* amber      (was orange) */
+  --display:'Bricolage Grotesque','Archivo Black',Impact,sans-serif;
+  --body:'Space Grotesk',Arial,sans-serif;
+  --r:22px;                  /* corner radius */
+  --soft:0 22px 44px -26px rgb(21 19 15 / .45);
+  color-scheme:light;
+}
+::selection{background:var(--volt);color:#fff}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* Typography: softer, tighter, still loud */
+.hero-title,.mega{font-weight:800;letter-spacing:-.045em;line-height:.88;text-transform:none}
+.hero-title .stroke,.mega em{-webkit-text-stroke:1.5px var(--black)}
+.black-section .mega em{-webkit-text-stroke-width:1.5px}
+.mega span{border-radius:.16em;padding:0 .1em}
+
+/* Containers: thinner borders, rounded, soft shadow instead of hard offset */
+.about-poster,.contact-card,.contact-form,.cta-box,.fact,.journey-card,.manifesto,
+.mobile-nav,.nav-shell,.process-strip,.project-feature,.project-tab,.service,
+.skill-group,.skills-now,.stat-grid{border-width:2px;border-radius:var(--r);box-shadow:var(--soft)}
+.service,.project-feature,.skill-group,.skills-now,.journey-card,.contact-card,.contact-form,.cta-box,.manifesto{overflow:hidden}
+.nav-shell{border-radius:999px;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--paper) 82%,transparent)}
+.stat-grid{overflow:hidden}
+.journey-pin,.brand-mark,.menu-btn,.service-icon,.image-stamp{border-width:2px}
+.journey-pin,.menu-btn{border-radius:50%}
+.brand-mark,.service-icon,.image-stamp{border-radius:14px}
+.profile-frame-label,.contact-sticker,.art-sticker{border-width:2px;border-radius:12px}
+
+/* Buttons: pill, lift on hover */
+.btn,.nav-cta{border-width:2px;border-radius:999px;box-shadow:none;
+  transition:transform .25s var(--ease),background .2s,color .2s}
+.btn:hover,.nav-cta:hover{transform:translateY(-3px);box-shadow:var(--soft)}
+.btn:active{transform:translateY(0) scale(.98)}
+
+/* Cards: gentle lift */
+.service,.project-tab,.journey-card,.fact{transition:transform .3s var(--ease),box-shadow .3s}
+.service:hover,.journey-card:hover{transform:translateY(-6px)}
+.project-feature img,.project-image img{border-radius:calc(var(--r) - 8px)}
+
+/* Skills: slimmer bars with rounded ends */
+.skill-bar{height:8px;border-width:0;border-radius:99px}
+.skill-bar-fill{border-radius:99px}
+.journey-line:before,.journey-line:after{width:3px;border-radius:3px}
+
+/* Section bands: calmer stripe */
+.mx-stripe-band{opacity:.55}
+
+/* Form fields */
+.contact-form input,.contact-form textarea{border-radius:14px;border-width:2px}
+
+/* Focus */
+:focus-visible{outline-width:2px;outline-offset:3px;border-radius:8px}
+
+/* Touch devices & reduced motion: drop heavy decorative layers */
+@media (hover:none),(pointer:coarse){.custom-cursor,.spotlight{display:none!important}}
+@media (prefers-reduced-motion:reduce){.grain-overlay,.custom-cursor,.spotlight{display:none!important}.reveal{opacity:1;transform:none}}
+
+@media(max-width:700px){:root{--r:16px}.hero-title,.mega{letter-spacing:-.035em}}

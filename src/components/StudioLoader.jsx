@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Logo from './Logo';
 
 const phrases = [
  'PREPARING PIXELS',
@@ -22,7 +23,7 @@ export default function StudioLoader({ onDone }) {
  },[onDone]);
  const phrase=phrases[Math.min(phrases.length-1,Math.floor(progress/(100/phrases.length)))];
  return <div className="loader" aria-label="Loading Vishan Rabari portfolio">
-  <img className="loader-logo" src="/vr-logo.svg" alt="VR — Vishan Rabari"/>
+  <Logo className="loader-badge" size={104}/>
   <div className="loader-mark">VR</div>
   <div className="loader-line"><span style={{width:`${progress}%`}}/></div>
   <div className="loader-meta"><small>VISHAN RABARI / KV AGENCY</small><strong>{String(progress).padStart(2,'0')}%</strong></div>
