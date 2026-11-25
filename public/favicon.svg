@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 100"><rect width="220" height="100" rx="8" fill="#050505"/><path d="M20 18h22l18 50 18-50h22L70 86H50z" fill="#baff00"/><path d="M104 18h40c22 0 34 11 34 29 0 12-6 21-17 26l23 13h-27l-19-11h-13v11h-21zm21 17v24h15c10 0 16-4 16-12s-6-12-16-12z" fill="#fff"/><text x="20" y="95" fill="#fff" font-family="Arial,sans-serif" font-size="10" font-weight="700" letter-spacing="3">VISHAN RABARI</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#02030a"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="url(#g)" stroke-opacity="0.5"/>
+  <text x="32" y="43" font-family="Space Grotesk, Arial, sans-serif" font-weight="800" font-size="30" text-anchor="middle" fill="url(#g)">VR</text>
+</svg>
